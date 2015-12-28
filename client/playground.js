@@ -23,6 +23,10 @@ stopDrums = function(){
 	player1.volume(0);
 }
 
+setDrumVolume = function(vol) {
+	player1.volume(vol);
+}
+
 playBass = function(){
 	player2.volume(1);
 }

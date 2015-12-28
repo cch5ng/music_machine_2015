@@ -1,24 +1,93 @@
 <template name="playground">
 
-<br><br><br>
+<div class="gap-medium"></div>
 <!-- Remember - if you want to control functions globaly, don't declare them as var. Just name them. -->
 
-<button class="startButton">DAC</button><br><br>
-<br>Track 1		<button class="myButton1">ON</button>
-<button class="myButton2">OFF</button>
-<br>Track 2		<button class="myButton3">ON</button>
- <button class="myButton4">OFF</button>
-<br>Track 3		<button class="myButton5">ON</button>
- <button class="myButton6">OFF</button>
+<div class="row gap-medium">
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<h3>Global controls</h3>
+	</div>
+	<div class="col-xs-12 col-sm-2 col-md-2">
+		<button class="btn btn-default startButton">
+			{{#if startdac}}<i class="fa fa-stop"></i> Stop
+			{{ else }}<i class="fa fa-play"></i> Play
+			{{/if }}
+		</button><br><br><!-- DAC -->
+	</div>
+	<div class="col-xs-12 col-sm-10 col-md-10">
+		<strong>Speed: {{sliderVal1}}</strong><br>
+		<div id="slider1" class="slider"></div>
+	  <br>
+	</div>
 
- <br>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<br>Track 1		<button class="btn btn-default myButton1">ON</button>
+		<button class="btn btn-default myButton2">OFF</button><br>
+	</div>
+	<div class="col-xs-10 col-sm-10 col-md-10">
+		<strong>Volume: {{sliderVolume1}}</strong><br>
+		<div id="sliderVol1" class="slider"></div>
+	  <br>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<br>Track 2		<button class="btn btn-default myButton3">ON</button>
+		<button class="btn btn-default myButton4">OFF</button>
+	</div>
+	<div class="col-xs-10 col-sm-10 col-md-10">
+		<strong>Volume: {{sliderVol2}}</strong><br>
+		<div id="slider-vol2" class="slider"></div>
+	  <br>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<br>Track 3		<button class="btn btn-default myButton5">ON</button>
+		<button class="btn btn-default myButton6">OFF</button>
+	</div>
+	<div class="col-xs-10 col-sm-10 col-md-10">
+		<strong>Volume: {{sliderVol3}}</strong><br>
+		<div id="slider-vol3" class="slider"></div>
+	  <br>
+	</div>
+</div>
 
  <h2> {{startdac}} {{drums}} {{bass}} {{arp}} </h2>
 
-<br>
-  <div id="slider1"></div>
-  <br>
-  Current Speed = {{sliderVal1}}
+<div class="row">
+</div>
 
+<div class="row gap-large"></div>
+<div class="row sequencer">
+  <div class="col-xs-1 col-xs-offset-2 col-sm-1 col-sm-offset-2 col-md-1 col-md-offset-2">
+  	<i class="fa fa-circle fa-lg sequencer-display"></i>
+  </div>
+  <div class="col-xs-1 col-sm-1 col-md-1">
+  	<i class="fa fa-circle fa-lg sequencer-display"></i>
+  </div>
+  <div class="col-xs-1 col-sm-1 col-md-1">
+  	<i class="fa fa-circle fa-lg sequencer-display"></i>
+  </div>
+  <div class="col-xs-1 col-sm-1 col-md-1">
+  	<i class="fa fa-circle fa-lg sequencer-display"></i>
+  </div>
+  <div class="col-xs-1 col-sm-1 col-md-1">
+  	<i class="fa fa-circle fa-lg sequencer-display"></i>
+  </div>
+  <div class="col-xs-1 col-sm-1 col-md-1">
+  	<i class="fa fa-circle fa-lg sequencer-display"></i>
+  </div>
+  <div class="col-xs-1 col-sm-1 col-md-1">
+  	<i class="fa fa-circle fa-lg sequencer-display"></i>
+  </div>
+  <div class="col-xs-1 col-sm-1 col-md-1">
+  	<i class="fa fa-circle fa-lg sequencer-display"></i>
+  </div>
+</div><!-- //end sequencer -->
 
 </template>
