@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-  max-width: 600px;
+  /*max-width: 600px;*/
   margin: 0 auto;
   min-height: 100%;
   background: white;
@@ -108,6 +108,30 @@ header .hide-completed {
 
 .toggle-private {
   margin-left: 5px;
+}
+
+.pink {
+  color: #e14169;
+}
+
+.gap-large {
+  padding-top: 60px;
+}
+
+.gap-medium {
+  padding-top: 40px;
+}
+
+.sequencer {
+  height: 30px;
+}
+
+.sequencer-display {
+  height: 17px;
+}
+
+.slider {
+  margin-top: 15px;
 }
 
 @media (max-width: 600px) {
