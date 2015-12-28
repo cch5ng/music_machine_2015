@@ -35,6 +35,10 @@ stopBass = function(){
 	player2.volume(0);
 }
 
+setBassVolume = function(vol) {
+	player2.volume(vol);
+}
+
 playArp = function(){
 	player3.volume(1);
 }

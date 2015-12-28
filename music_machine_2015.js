@@ -65,6 +65,7 @@ if (Meteor.isClient) {
   //don't forget the commas between each function
   //the last one doesn't have to have one!
 
+  //each slider has a template helper function which gets the last set mongo value and displays it as text
     'sliderVal1':  function() {
       var slider = MusicMachine.findOne();
       if (slider) {
@@ -74,16 +75,6 @@ if (Meteor.isClient) {
         }
       }
 
-//      if (slider && Session.get('uiSlider')) {
-          //Template.playground.onRendered(function() {
-          //associating {uiSlider: slider.slide} with this slider instance
-          
-          //Template.instance().$('#slider1').value(slider.slide);
-          //var value = slider.slide;
-          //Template.instance().$('#slider1').slider('option', 'value', slider.slide);
-          //Template.instance().$('#slider1').data('uiSlider').value(slider.slide);
-          //});
-//      }
       return slider.slide;
     },//end sliderVal1
 
@@ -96,13 +87,23 @@ if (Meteor.isClient) {
           Session.set('sliderVolume1', slider.sliderVolume1);
         }
       }
-      return slider.sliderVolume1;
 
-      // if (slide)
-      //   Template.instance().$('#sliderVol1').data('uiSlider').value(slider.sliderVolume1);
-      //   return slider.sliderVolume1;
-      // }
-    }//end sliderVolume1
+      return slider.sliderVolume1;
+    }, //end sliderVolume1
+
+    //for track2 volume slider
+    'sliderVolume2':  function() {
+      var slider = MusicMachine.findOne();
+      if (slider) {
+        setBassVolume(slider.sliderVolume2);
+        if (Session.get('sliderVolume2')) {
+          Session.set('sliderVolume2', slider.sliderVolume2);
+        }
+      }
+
+      return slider.sliderVolume2;
+    }//end sliderVolume2
+
 
   });//end playground helpers
 
@@ -117,37 +118,48 @@ if (Meteor.isClient) {
 
       if (val.start === 1) {
         Session.set('startdac', 0);
-        MusicMachine.update({ _id: val._id }, {$set: {start: 0}});
+//reset start and all volume sliders
+        MusicMachine.update({ _id: val._id }, {$set: {start: 0, sliderVolume1: 0, sliderVolume2: 0}});
+//reset all volume slider displays
+        $('#sliderVol1').slider('value', 0);
+        $('#sliderVol2').slider('value', 0);
       } else if (val.start === 0) {
         Session.set('startdac', 1);
-        MusicMachine.update({ _id: val._id }, {$set: {start: 1}});
+//reset start and all volume sliders
+        MusicMachine.update({ _id: val._id }, {$set: {start: 1, sliderVolume1: 1, sliderVolume2: 1}});
+//reset all volume slider displays
+        $('#sliderVol1').slider('value', 1);
+        $('#sliderVol2').slider('value', 1);
       }
     },
 
      "click button.myButton1": function () {
       Session.set('drums', 1);
       var val = MusicMachine.findOne({});
-      MusicMachine.update({ _id: val._id }, {$set: {drums: 1}});
-
+//because of volume slider per track, the volume mongo field must be updated
+      MusicMachine.update({ _id: val._id }, {$set: {drums: 1, sliderVolume1: 1}});
+//just updating the slider view so the user is clear
+      $('#sliderVol1').slider('value', 1);
     },
       "click button.myButton2": function () {
       Session.set('drums', 0);
       var val = MusicMachine.findOne({});
-      MusicMachine.update({ _id: val._id }, {$set: {drums: 0}});
+      MusicMachine.update({ _id: val._id }, {$set: {drums: 0, sliderVolume1: 0}});
+      $('#sliderVol1').slider('value', 0);
     },
 
       "click button.myButton3": function () {
       Session.set('bass', 1);
       var val = MusicMachine.findOne({});
-      MusicMachine.update({ _id: val._id }, {$set: {bassline: 1}});
-
+      MusicMachine.update({ _id: val._id }, {$set: {bassline: 1, sliderVolume2: 1}});
+      $('#sliderVol2').slider('value', 1);
     },
 
       "click button.myButton4": function () {
       Session.set('bass', 0);
       var val = MusicMachine.findOne({});
-      MusicMachine.update({ _id: val._id }, {$set: {bassline: 0}});
-
+      MusicMachine.update({ _id: val._id }, {$set: {bassline: 0, sliderVolume2: 0}});
+      $('#sliderVol2').slider('value', 0);
     },
       "click button.myButton5": function () {
       Session.set('arp', 1);
@@ -182,8 +194,15 @@ if (Meteor.isClient) {
     }, 50, { leading: false });
 
     var handlerVol1 = _.throttle(function(event, ui) {
-        var valV1 = MusicMachine.findOne({});
-        MusicMachine.update({ _id: valV1._id }, {$set: {sliderVolume1: ui.value}});
+        var val = MusicMachine.findOne({});
+        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume1: ui.value}});
+        Template.instance().$('#sliderVol1').data('uiSlider').value(player.sliderVolume1);
+    }, 1, { leading: false });
+
+    var handlerVol2 = _.throttle(function(event, ui) {
+        var val = MusicMachine.findOne({});
+        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume2: ui.value}});
+        Template.instance().$('#sliderVol2').data('uiSlider').value(player.sliderVolume2);
     }, 1, { leading: false });
 
     if (player) {
@@ -201,7 +220,7 @@ if (Meteor.isClient) {
       });
     } else {
       console.log('slider.slide: ' + player.slide);
-      Template.instance().$('#slider1').slide('value', player.slide);
+      Template.instance().$('#slider1').slider('value', player.slide);
     }
 
     //track 1 volume slider, initial render
@@ -214,21 +233,23 @@ if (Meteor.isClient) {
       });
     } else {
       console.log('vol1 slide value: ' + player.sliderVolume1);
-      Template.instance().$('#sliderVol1').slide('value', player.sliderVolume1);
+      Template.instance().$('#sliderVol1').slider('value', player.sliderVolume1);
     }
 
-//copying from above
-//    var slider = MusicMachine.findOne();
+    //track 1 volume slider, initial render
+    if (!Template.instance().$('#sliderVol2').data('uiSlider')) {
+      $("#sliderVol2").slider({
+        slide: handlerVol2,
+        value: player.sliderVolume2,
+        min: 0,
+        max: 10
+      });
+      
+    } else {
+      console.log('vol2 slide value: ' + player.sliderVolume2);
+      Template.instance().$('#sliderVol2').slide('value', player.sliderVolume2);
+    }
 
-    // if (player) {
-    //   console.log('gets here');
-    //   //Template.instance().$('#slider1').data('uiSlider').value(slider.slide);
-    //   Template.instance().$('#slider1').slider('option', 'value', player.slide);
-    //   setSpeed(slider.slide/50);
-    //   // Template.instance().$('#sliderVol1').data('sliderVol1').value(slider.sliderVolume1);
-    //   // setDrumVolume(slider.sliderVolume1);
-
-    // }
   }); //end Template.onRendered
 
   console.log($('.sequencer-display').length);
@@ -250,7 +271,7 @@ if (Meteor.isClient) {
     setInterval(function() {
       if (Session.get('startdac') === 1) {
         toggle(counter);
-        console.log(calculateCount(counter));
+        //console.log(calculateCount(counter));
         counter++;
       }
     }, displayInterval);
@@ -261,7 +282,8 @@ if (Meteor.isServer) {
 //      MusicMachine.remove({});
       if (MusicMachine.find().count() === 0) {
 //set initial start value to make sure dac button click would result in allplay initially
-      MusicMachine.insert({slide: 50, start: 0, sliderVolume1: 1});
+//also initializing all volume settings so there is something to display
+      MusicMachine.insert({slide: 50, start: 0, sliderVolume1: 1, sliderVolume2: 1});
     }
 
 }
