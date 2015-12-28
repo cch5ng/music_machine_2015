@@ -6,3 +6,5 @@
 
 * Package dependencies
   * mizzao:jquery-ui
+  * twbs:bootstrap
+  * fortawesome:fontawesome
