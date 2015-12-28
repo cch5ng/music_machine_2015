@@ -8,3 +8,12 @@
   * mizzao:jquery-ui
   * twbs:bootstrap
   * fortawesome:fontawesome
+
+## Adding Slider for track
+  * Requires template handler to display mongo value for the slider (for ex volume)
+  * Requires update to the template onRender() function
+    * Requires slider instantiation (jquery ui) and corresponding handler
+  * Requires update to the startdac global play/stop button (client handler)
+  * Requires update to the respective track's on/off buttons (click handler
+  * Requires update to the playground.js file, new function to set the track's volume (maxim object) based on slider browser value
+  * Requires update to the template
