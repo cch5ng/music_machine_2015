@@ -368,7 +368,20 @@ if (Meteor.isClient) {
       }
 
       return slider.sliderVolume8;
-    }//end sliderVolume8
+    }, //end sliderVolume8
+
+    //for track8 speed slider
+    'sliderSpeed8':  function() {
+      var slider = MusicMachine.findOne();
+      if (slider) {
+        setCymbalSpeed(slider.sliderSpeed8/50);
+        if (Session.get('sliderSpeed8')) {
+          Session.set('sliderSpeed8', slider.sliderSpeed8);
+        }
+      }
+
+      return slider.sliderSpeed8;
+    } //end sliderSpeed8
 
   });//end playground helpers
 
@@ -586,6 +599,12 @@ if (Meteor.isClient) {
         Template.instance().$('#sliderVol8').data('uiSlider').value(player.sliderVolume8);
     }, 1, { leading: false });
 
+    var handlerSpeed8 = _.throttle(function(event, ui) {
+        var val = MusicMachine.findOne({});
+        MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed8: ui.value}});
+        Template.instance().$('#sliderSpeed8').data('uiSlider').value(player.sliderSpeed8);
+    }, 50, { leading: false });
+
     if (player) {
       console.log('slide from mongo: ', player.slide);
       Session.set('sliderVolume1', player.sliderVolume1);
@@ -603,6 +622,7 @@ if (Meteor.isClient) {
       Session.set('sliderVolume7', player.sliderVolume7);
       Session.set('sliderSpeed7', player.sliderSpeed7);
       Session.set('sliderVolume8', player.sliderVolume8);
+      Session.set('sliderSpeed8', player.sliderSpeed8);
     }
 
     //track 1 volume slider, initial render
@@ -813,6 +833,20 @@ if (Meteor.isClient) {
     } else {
       console.log('vol8 slide value: ' + player.sliderVolume8);
       Template.instance().$('#sliderVol8').slide('value', player.sliderVolume8);
+    }
+
+    //track 8 speed slider, initial render
+    if (!Template.instance().$('#sliderSpeed8').data('uiSlider')) {
+      $("#sliderSpeed8").slider({
+        slide: handlerSpeed8,
+        value: player.sliderSpeed8,
+        min: 0,
+        max: 100,
+        orientation: 'vertical'
+      });
+    } else {
+      console.log('speed8 slide value: ' + player.sliderSpeed8);
+      Template.instance().$('#sliderSpeed8').slider('value', player.sliderSpeed8);
     }
 
   }); //end Template.onRendered
