@@ -47,6 +47,10 @@ setDrumVolume = function(vol) {
 	player1.volume(vol);
 };
 
+setDrumSpeed = function(speed) {
+	player1.speed(speed);
+};
+
 playBass = function(){
 	player2.volume(1);
 };
@@ -57,6 +61,10 @@ stopBass = function(){
 
 setBassVolume = function(vol) {
 	player2.volume(vol);
+};
+
+setBassSpeed = function(speed) {
+	player2.speed(speed);
 };
 
 playArp = function(){
@@ -71,6 +79,10 @@ setArpVolume = function(vol) {
 	player3.volume(vol);
 };
 
+setArpSpeed = function(speed) {
+	player3.speed(speed);
+};
+
 playVibes = function(){
 	player4.volume(1);
 };
@@ -81,6 +93,10 @@ stopVibes = function(){
 
 setVibesVolume = function(vol) {
 	player4.volume(vol);
+};
+
+setVibesSpeed = function(speed) {
+	player4.speed(speed);
 };
 
 playSnaredrum = function(){
@@ -95,6 +111,10 @@ setSnaredrumVolume = function(vol) {
 	player5.volume(vol);
 };
 
+setSnaredrumSpeed = function(speed) {
+	player5.speed(speed);
+};
+
 playChords = function(){
 	player6.volume(1);
 };
@@ -105,6 +125,10 @@ stopChords = function(){
 
 setChordsVolume = function(vol) {
 	player6.volume(vol);
+};
+
+setChordsSpeed = function(speed) {
+	player6.speed(speed);
 };
 
 playDrum2 = function(){
@@ -119,6 +143,10 @@ setDrum2Volume = function(vol) {
 	player7.volume(vol);
 };
 
+setDrum2Speed = function(speed) {
+	player7.speed(speed);
+};
+
 playCymbal = function(){
 	player8.volume(1);
 };
@@ -129,6 +157,10 @@ stopCymbal = function(){
 
 setCymbalVolume = function(vol) {
 	player8.volume(vol);
+};
+
+setCymbalSpeed = function(speed) {
+	player8.speed(speed);
 };
 
 playAll = function() {
