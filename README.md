@@ -31,6 +31,7 @@
   * http://subtlepatterns.com/one-in-a-million-s/
 
 ### Status
+  * (TODO) would like to refactor: currently a lot of redundancy so would like to be able to add new tracks more easily
   * (TODO) need 7 more speed sliders
     * (DONE) added speed update functions to playground.js
     * (DONE - proof of concept) probably make the speed slider in to a per track slider
