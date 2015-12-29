@@ -20,3 +20,9 @@
 
 ## Background image
   * http://subtlepatterns.com/one-in-a-million-s/
+
+### Status
+  * just got through volume and track 5
+  * need 3 more tracks
+  * need 8 more sliders
+    * probably make the speed slider in to a per track slider
