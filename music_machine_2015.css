@@ -7,6 +7,17 @@
   background-color: rgba(204, 204, 204, 0.5);
 }
 
+.navbar-default .navbar-brand {
+  margin-top: 7px;
+  font-family: 'Megrim', cursive;
+  font-size: 25px;
+  color: #17014f;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+  background: #3c1b90 url('');
+}
+
 .navbar-header {
   width: 100%;
 }
@@ -18,20 +29,8 @@
 body {
   font-family: sans-serif;
   background-image: url('/ignasi_pattern_s.png');
-/*
-  background-color: #315481;
-  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
-  background-attachment: fixed;
-
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-*/
   padding: 0 0 70px 0;
   margin: 0;
-
   font-size: 14px;
 }
 
@@ -39,7 +38,6 @@ body {
   max-width: 800px;
   margin: -20px auto 0;
   min-height: 100%;
-  /*background: white;*/
   width: 100%;
 }
 
@@ -130,7 +128,10 @@ header .hide-completed {
 }
 
 .pink {
-  color: #e14169;
+  color: #9380c1;
+  /*#674da8;*/
+  /*#270284;*/
+  /*#e14169;*/
 }
 
 .gap-large {
@@ -143,6 +144,8 @@ header .hide-completed {
 
 .sequencer {
   height: 30px;
+  padding-top: 20px;
+  color: #1f0169;;
 }
 
 .sequencer-display {
@@ -163,9 +166,6 @@ header .hide-completed {
   /*background-color: #f5f5f5;*/
 }
 
-.sequencer {
-  padding-top: 15px;
-}
 
 @media (max-width: 600px) {
   li {
