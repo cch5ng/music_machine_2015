@@ -295,7 +295,7 @@ if (Meteor.isClient) {
       $('#sliderVol5').slider('value', 1);
     },
 
-      "click button.btn4Off": function () {
+      "click button.btn5Off": function () {
       Session.set('vibes', 0);
       var val = MusicMachine.findOne({});
       MusicMachine.update({ _id: val._id }, {$set: {snaredrum: 0, sliderVolume5: 0}});
