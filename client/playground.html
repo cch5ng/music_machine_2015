@@ -25,7 +25,7 @@
 <div class="container">
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12">
-		<br>Track 1		<button class="btn btn-default myButton1">ON</button>
+		<br>Track 1: Drums		<button class="btn btn-default myButton1">ON</button>
 		<button class="btn btn-default myButton2">OFF</button><br>
 	</div>
 	<div class="col-xs-10 col-sm-10 col-md-10">
@@ -37,7 +37,7 @@
 
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12">
-		<br>Track 2		<button class="btn btn-default myButton3">ON</button>
+		<br>Track 2: Baseline		<button class="btn btn-default myButton3">ON</button>
 		<button class="btn btn-default myButton4">OFF</button>
 	</div>
 	<div class="col-xs-10 col-sm-10 col-md-10">
@@ -46,9 +46,10 @@
 	  <br>
 	</div>
 </div>
+
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12">
-		<br>Track 3		<button class="btn btn-default myButton5">ON</button>
+		<br>Track 3: Arpeggio		<button class="btn btn-default myButton5">ON</button>
 		<button class="btn btn-default myButton6">OFF</button>
 	</div>
 	<div class="col-xs-10 col-sm-10 col-md-10">
@@ -58,7 +59,19 @@
 	</div>
 </div>
 
- <h2> {{startdac}} {{drums}} {{bass}} {{arp}} </h2>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<br>Track 4: Vibraphone		<button class="btn btn-default btn4On">ON</button>
+		<button class="btn btn-default btn4Off">OFF</button>
+	</div>
+	<div class="col-xs-10 col-sm-10 col-md-10">
+		<strong>Volume: {{sliderVolume4}}</strong><br>
+		<div id="sliderVol4" class="slider"></div>
+	  <br>
+	</div>
+</div>
+
+ <h2> {{startdac}} {{drums}} {{bass}} {{arp}} {{vibes}}</h2>
 
 </div><!-- end container -->
 
