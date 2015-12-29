@@ -17,3 +17,6 @@
   * Requires update to the respective track's on/off buttons (click handler
   * Requires update to the playground.js file, new function to set the track's volume (maxim object) based on slider browser value
   * Requires update to the template
+
+## Background image
+  * http://subtlepatterns.com/one-in-a-million-s/
