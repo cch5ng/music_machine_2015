@@ -14,9 +14,9 @@
   color: #17014f;
 }
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+/*.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
   background: #3c1b90 url('');
-}
+}*/
 
 .navbar-header {
   width: 100%;
@@ -142,6 +142,10 @@ header .hide-completed {
   padding-top: 40px;
 }
 
+.gap-small {
+  padding-top: 20px;
+}
+
 .sequencer {
   height: 30px;
   padding-top: 20px;
@@ -153,7 +157,7 @@ header .hide-completed {
 }
 
 .slider {
-  margin-top: 15px;
+  /*margin-top: 15px;*/
   /*height: 200px;*/
 }
 

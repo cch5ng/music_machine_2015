@@ -48,7 +48,7 @@ if (Meteor.isClient) {
       if (val.start === 1) {
         Session.set('startdac', 0);
 //reset start and all volume sliders
-        MusicMachine.update({ _id: val._id }, {$set: {start: 0, sliderVolume1: 0, sliderVolume2: 0, sliderVolume3: 0, sliderVolume4: 0, sliderVolume5: 0, sliderVolume6: 0, sliderVolume7: 0}});
+        MusicMachine.update({ _id: val._id }, {$set: {start: 0, sliderVolume1: 0, sliderVolume2: 0, sliderVolume3: 0, sliderVolume4: 0, sliderVolume5: 0, sliderVolume6: 0, sliderVolume7: 0, sliderVolume8: 0}});
 //reset all volume slider displays
         $('#sliderVol1').slider('value', 0);
         $('#sliderVol2').slider('value', 0);
@@ -57,10 +57,11 @@ if (Meteor.isClient) {
         $('#sliderVol5').slider('value', 0);
         $('#sliderVol6').slider('value', 0);
         $('#sliderVol7').slider('value', 0);
+        $('#sliderVol8').slider('value', 0);
       } else if (val.start === 0) {
         Session.set('startdac', 1);
 //reset start and all volume sliders
-        MusicMachine.update({ _id: val._id }, {$set: {start: 1, sliderVolume1: 1, sliderVolume2: 1, sliderVolume3: 1, sliderVolume4: 1, sliderVolume5: 1, sliderVolume6: 1, sliderVolume7: 1}});
+        MusicMachine.update({ _id: val._id }, {$set: {start: 1, sliderVolume1: 1, sliderVolume2: 1, sliderVolume3: 1, sliderVolume4: 1, sliderVolume5: 1, sliderVolume6: 1, sliderVolume7: 1, sliderVolume8: 1}});
 //reset all volume slider displays
         $('#sliderVol1').slider('value', 1);
         $('#sliderVol2').slider('value', 1);
@@ -69,6 +70,7 @@ if (Meteor.isClient) {
         $('#sliderVol5').slider('value', 1);
         $('#sliderVol6').slider('value', 1);
         $('#sliderVol7').slider('value', 1);
+        $('#sliderVol8').slider('value', 1);
       }
     }
 
@@ -185,6 +187,18 @@ if (Meteor.isClient) {
       return Session.get('hihat');
     },
 
+    "cymbal": function () {
+      var starter = MusicMachine.findOne();
+      if (starter) {
+        if (starter.cymbal == 1) {
+          playCymbal();
+        } else if (starter.cymbal === 0) {
+          stopCymbal();
+        }
+      }
+      return Session.get('cymbal');
+    },
+
   //don't forget the commas between each function
   //the last one doesn't have to have one!
 
@@ -277,7 +291,20 @@ if (Meteor.isClient) {
       }
 
       return slider.sliderVolume7;
-    }//end sliderVolume7
+    }, //end sliderVolume7
+
+    //for track8 volume slider
+    'sliderVolume8': function() {
+      var slider = MusicMachine.findOne();
+      if (slider) {
+        setHihatVolume(slider.sliderVolume8);
+        if (Session.get('sliderVolume8')) {
+          Session.set('sliderVolume8', slider.sliderVolume8);
+        }
+      }
+
+      return slider.sliderVolume8;
+    }//end sliderVolume8
 
 
   });//end playground helpers
@@ -382,7 +409,22 @@ if (Meteor.isClient) {
       var val = MusicMachine.findOne({});
       MusicMachine.update({ _id: val._id }, {$set: {hihat: 0, sliderVolume7: 0}});
       $('#sliderVol7').slider('value', 0);
+    },
+
+      "click button.btn8On": function () {
+      Session.set('cymbal', 1);
+      var val = MusicMachine.findOne({});
+      MusicMachine.update({ _id: val._id }, {$set: {cymbal: 1, sliderVolume8: 1}});
+      $('#sliderVol8').slider('value', 1);
+    },
+
+      "click button.btn8Off": function () {
+      Session.set('cymbal', 0);
+      var val = MusicMachine.findOne({});
+      MusicMachine.update({ _id: val._id }, {$set: {cymbal: 0, sliderVolume8: 0}});
+      $('#sliderVol8').slider('value', 0);
     }//,
+
 
   });
 
@@ -433,6 +475,12 @@ if (Meteor.isClient) {
         Template.instance().$('#sliderVol7').data('uiSlider').value(player.sliderVolume7);
     }, 1, { leading: false });
 
+    var handlerVol8 = _.throttle(function(event, ui) {
+        var val = MusicMachine.findOne({});
+        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume8: ui.value}});
+        Template.instance().$('#sliderVol8').data('uiSlider').value(player.sliderVolume8);
+    }, 1, { leading: false });
+
     if (player) {
       console.log('slide from mongo: ', player.slide);
       Session.set('sliderVolume1', player.sliderVolume1);
@@ -442,6 +490,7 @@ if (Meteor.isClient) {
       Session.set('sliderVolume5', player.sliderVolume5);
       Session.set('sliderVolume6', player.sliderVolume6);
       Session.set('sliderVolume7', player.sliderVolume7);
+      Session.set('sliderVolume8', player.sliderVolume8);
     }
 
     //track 1 volume slider, initial render
@@ -542,6 +591,20 @@ if (Meteor.isClient) {
       Template.instance().$('#sliderVol7').slide('value', player.sliderVolume7);
     }
 
+    //track 8 volume slider, initial render
+    if (!Template.instance().$('#sliderVol8').data('uiSlider')) {
+      $("#sliderVol8").slider({
+        slide: handlerVol8,
+        value: player.sliderVolume5,
+        min: 0,
+        max: 10,
+        orientation: 'vertical'
+      });
+    } else {
+      console.log('vol8 slide value: ' + player.sliderVolume8);
+      Template.instance().$('#sliderVol8').slide('value', player.sliderVolume8);
+    }
+
   }); //end Template.onRendered
 
   console.log($('.sequencer-display').length);
@@ -582,7 +645,7 @@ if (Meteor.isServer) {
   if (MusicMachine.find().count() === 0) {
 //set initial start value to make sure dac button click would result in allplay initially
 //also initializing all volume settings so there is something to display
-    MusicMachine.insert({slide: 50, start: 0, sliderVolume1: 1, sliderVolume2: 1, sliderVolume3: 1, sliderVolume4: 1, sliderVolume5: 1, sliderVolume6: 1, sliderVolume7: 1});
+    MusicMachine.insert({slide: 50, start: 0, sliderVolume1: 1, sliderVolume2: 1, sliderVolume3: 1, sliderVolume4: 1, sliderVolume5: 1, sliderVolume6: 1, sliderVolume7: 1, sliderVolume8: 1});
   }
 }
 
