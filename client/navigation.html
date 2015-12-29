@@ -1,0 +1,22 @@
+<!--//client/navigation.html -->
+
+<template name="navigation">
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <div class="navbar-brand" href="#">
+	        Music Machine 2015
+	      </div>
+	      <p class="navbar-text">
+	      		 <button class="btn btn-default startButton">
+						{{#if startdac}}<i class="fa fa-stop"></i> Stop
+						{{ else }}<i class="fa fa-play"></i> Play
+						{{/if }}
+					</button>
+					<strong>Speed: {{sliderVal1}}</strong>
+					<div id="slider1" class="slider"></div>
+	      </p>
+	    </div>
+	  </div>
+	</nav>
+</template>
