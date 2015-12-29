@@ -6,7 +6,6 @@ MusicMachine = new Mongo.Collection("musicMachine");
 if (Meteor.isClient) {
 
   Meteor.startup(function () {
-
   });
 
   Template.navigation.helpers({
@@ -21,29 +20,13 @@ if (Meteor.isClient) {
         }
       }
       return Session.get('startdac');
-    }//,
-
-      //each slider has a template helper function which gets the last set mongo value and displays it as text
-    // 'sliderVal1':  function() {
-    //   var slider = MusicMachine.findOne();
-    //   if (slider) {
-    //     setSpeed(slider.slide/50);
-    //     if (Session.get('uiSlider')) {
-    //       Session.set('uiSlider', slider.slide);
-    //     }
-    //   }
-
-    //   return slider.slide;
-    // },//end sliderVal1
+    }
   }); //end navigation helpers
 
   Template.navigation.events({
 
-     "click button.startButton": function () {
-//TODO test
-      console.log(Session.get('startdac'));
+    "click button.startButton": function () {
       var val = MusicMachine.findOne({});
-      console.log('val: ' + val);
 
       if (val.start === 1) {
         Session.set('startdac', 0);
@@ -87,18 +70,7 @@ if (Meteor.isClient) {
       console.log('slide from mongo: ', player.slide);
       Session.set('uiSlider', player.slide);
     }
-    //global speed slider, initial render
-    // if (!Template.instance().$('#slider1').data('uiSlider')) {
-    //   $("#slider1").slider({
-    //     slide: handler,
-    //     value: player.slide,
-    //     min: 0,
-    //     max: 100
-    //   });
-    // } else {
-    //   console.log('slider.slide: ' + player.slide);
-    //   Template.instance().$('#slider1').slider('value', player.slide);
-    // }
+
   }); //end navigation onRender
 
   Template.playground.helpers({
@@ -240,6 +212,19 @@ if (Meteor.isClient) {
 
       return slider.sliderVolume2;
     }, //end sliderVolume2
+
+    //for track2 speed slider
+    'sliderSpeed2':  function() {
+      var slider = MusicMachine.findOne();
+      if (slider) {
+        setBassSpeed(slider.sliderSpeed2/50);
+        if (Session.get('sliderSpeed2')) {
+          Session.set('sliderSpeed2', slider.sliderSpeed2);
+        }
+      }
+
+      return slider.sliderSpeed2;
+    }, //end sliderSpeed2
 
     //for track3 volume slider
     'sliderVolume3': function() {
@@ -463,6 +448,12 @@ if (Meteor.isClient) {
         Template.instance().$('#sliderVol2').data('uiSlider').value(player.sliderVolume2);
     }, 1, { leading: false });
 
+    var handlerSpeed2 = _.throttle(function(event, ui) {
+        var val = MusicMachine.findOne({});
+        MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed2: ui.value}});
+        Template.instance().$('#sliderSpeed2').data('uiSlider').value(player.sliderSpeed2);
+    }, 50, { leading: false });
+
     var handlerVol3 = _.throttle(function(event, ui) {
         var val = MusicMachine.findOne({});
         MusicMachine.update({ _id: val._id }, {$set: {sliderVolume3: ui.value}});
@@ -506,6 +497,7 @@ if (Meteor.isClient) {
       Session.set('sliderVolume1', player.sliderVolume1);
       Session.set('sliderSpeed1', player.sliderSpeed1);
       Session.set('sliderVolume2', player.sliderVolume2);
+      Session.set('sliderSpeed2', player.sliderSpeed2);
       Session.set('sliderVolume3', player.sliderVolume3);
       Session.set('sliderVolume4', player.sliderVolume4);
       Session.set('sliderVolume5', player.sliderVolume5);
@@ -554,6 +546,20 @@ if (Meteor.isClient) {
     } else {
       console.log('vol2 slide value: ' + player.sliderVolume2);
       Template.instance().$('#sliderVol2').slide('value', player.sliderVolume2);
+    }
+
+    //track 2 speed slider, initial render
+    if (!Template.instance().$('#sliderSpeed2').data('uiSlider')) {
+      $("#sliderSpeed2").slider({
+        slide: handlerSpeed2,
+        value: player.sliderSpeed2,
+        min: 0,
+        max: 100,
+        orientation: 'vertical'
+      });
+    } else {
+      console.log('speed2 slide value: ' + player.sliderSpeed2);
+      Template.instance().$('#sliderSpeed2').slider('value', player.sliderSpeed2);
     }
 
     //track 3 volume slider, initial render
@@ -680,7 +686,7 @@ if (Meteor.isServer) {
   if (MusicMachine.find().count() === 0) {
 //set initial start value to make sure dac button click would result in allplay initially
 //also initializing all volume settings so there is something to display
-    MusicMachine.insert({slide: 50, start: 0, sliderVolume1: 1, sliderVolume2: 1, sliderVolume3: 1, sliderVolume4: 1, sliderVolume5: 1, sliderVolume6: 1, sliderVolume7: 1, sliderVolume8: 1, sliderSpeed1: 50});
+    MusicMachine.insert({slide: 50, start: 0, sliderVolume1: 1, sliderVolume2: 1, sliderVolume3: 1, sliderVolume4: 1, sliderVolume5: 1, sliderVolume6: 1, sliderVolume7: 1, sliderVolume8: 1, sliderSpeed1: 50, sliderSpeed2: 50, sliderSpeed3: 50, sliderSpeed4: 50, sliderSpeed5: 50, sliderSpeed6: 50, sliderSpeed7: 50, sliderSpeed8: 50});
   }
 }
 

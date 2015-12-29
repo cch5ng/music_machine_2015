@@ -17,9 +17,10 @@ maxim7 = new Maxim();
 maxim8 = new Maxim();
 
 //new player per Maxim obj
-//TODO add functions for speed (new slider)
 player1 = maxim1.loadFile("drums1.wav");
 player1.loop;
+
+//TODO add functions for speed (new slider)
 player2 = maxim2.loadFile("bassline.wav");
 player2.loop;
 player3 = maxim3.loadFile("arp.wav");
