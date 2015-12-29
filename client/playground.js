@@ -11,60 +11,62 @@ maxim3 = new Maxim();
 player1 = maxim1.loadFile("drums1.wav");
 player1.loop
 player2 = maxim2.loadFile("bassline.wav");
-player2.loop
+player2.loop;
 player3 = maxim3.loadFile("arp.wav");
-player3.loop
+player3.loop;
 
 playDrums = function(){
 	player1.volume(1);
-}
+};
 
 stopDrums = function(){
 	player1.volume(0);
-}
+};
 
 setDrumVolume = function(vol) {
 	player1.volume(vol);
-}
+};
 
 playBass = function(){
 	player2.volume(1);
-}
+};
 
 stopBass = function(){
 	player2.volume(0);
-}
+};
 
 setBassVolume = function(vol) {
 	player2.volume(vol);
-}
+};
 
 playArp = function(){
 	player3.volume(1);
-}
+};
 
 stopArp = function(){
 	player3.volume(0);
-}
+};
+
+setArpVolume = function(vol) {
+	player3.volume(vol);
+};
 
 playAll = function() {
 	player1.play();
 	player2.play();
 	player3.play();
-}
+};
 
 stopAll = function() {
 	player1.stop();
 	player2.stop();
 	player3.stop();
-}
+};
 
 setSpeed = function(speed) {
-
 	player1.speed(speed);
 	player2.speed(speed);
 	player3.speed(speed);
-
-}
+};
 
 
