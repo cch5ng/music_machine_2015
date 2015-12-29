@@ -2,9 +2,18 @@
 
 * A collaborative music making application using the meteor framework
 
+## Known Issue
+
+* Sometimes, the jquery-ui sliders do not display. Typically refreshing the browser several times will resolve this issue.
+** The browser console shows an error like:
+** Exception from Tracker afterFlush function: debug.js:41 TypeError: Cannot read property 'sliderVolume1' of undefined at null
+** This issue will prevent the sliders from being rendered but I don't know the code resolution. 
+
+## About
+
 * Coursera: Responsive Website Tutorials and Examples
 
-* Package dependencies
+## Package dependencies
   * mizzao:jquery-ui
   * twbs:bootstrap
   * fortawesome:fontawesome
@@ -22,8 +31,8 @@
   * http://subtlepatterns.com/one-in-a-million-s/
 
 ### Status
-  * (TODO) need 8 more sliders
+  * (TODO) need 7 more speed sliders
     * (DONE) added speed update functions to playground.js
-    * probably make the speed slider in to a per track slider
+    * (DONE - proof of concept) probably make the speed slider in to a per track slider
   * (DONE) just got through volume and track 5
   * (DONE) need 3 more tracks
