@@ -22,7 +22,8 @@
   * http://subtlepatterns.com/one-in-a-million-s/
 
 ### Status
-  * just got through volume and track 5
-  * need 3 more tracks
-  * need 8 more sliders
+  * (TODO) need 8 more sliders
+    * (DONE) added speed update functions to playground.js
     * probably make the speed slider in to a per track slider
+  * (DONE) just got through volume and track 5
+  * (DONE) need 3 more tracks
