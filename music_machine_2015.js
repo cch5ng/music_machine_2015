@@ -374,7 +374,7 @@ if (Meteor.isClient) {
     'sliderSpeed8':  function() {
       var slider = MusicMachine.findOne();
       if (slider) {
-        setCymbalSpeed(slider.sliderSpeed8/50);
+        setCymbalSpeed(slider.sliderSpeed8/15);
         if (Session.get('sliderSpeed8')) {
           Session.set('sliderSpeed8', slider.sliderSpeed8);
         }
