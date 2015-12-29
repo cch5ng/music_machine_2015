@@ -17,6 +17,7 @@ maxim7 = new Maxim();
 maxim8 = new Maxim();
 
 //new player per Maxim obj
+//TODO add functions for speed (new slider)
 player1 = maxim1.loadFile("drums1.wav");
 player1.loop;
 player2 = maxim2.loadFile("bassline.wav");
@@ -27,6 +28,14 @@ player4 = maxim4.loadFile("vibes.wav");
 player4.loop;
 player5 = maxim5.loadFile("snaredrum1.wav");
 player5.loop;
+player6 = maxim6.loadFile("chords.wav");
+player6.loop;
+
+//TODO add functions for play, stop, volume
+player7 = maxim7.loadFile("hihat2.wav");
+player7.loop;
+player8 = maxim8.loadFile("cymbal1.wav");
+player8.loop;
 
 playDrums = function(){
 	player1.volume(1);
@@ -88,12 +97,38 @@ setSnaredrumVolume = function(vol) {
 	player5.volume(vol);
 };
 
+playChords = function(){
+	player6.volume(1);
+};
+
+stopChords = function(){
+	player6.volume(0);
+};
+
+setChordsVolume = function(vol) {
+	player6.volume(vol);
+};
+
+playHihat = function(){
+	player7.volume(1);
+};
+
+stopHihat = function(){
+	player7.volume(0);
+};
+
+setHihatVolume = function(vol) {
+	player7.volume(vol);
+};
+
 playAll = function() {
 	player1.play();
 	player2.play();
 	player3.play();
 	player4.play();
 	player5.play();
+	player6.play();
+	player7.play();
 };
 
 stopAll = function() {
@@ -102,14 +137,14 @@ stopAll = function() {
 	player3.stop();
 	player4.stop();
 	player5.stop();
+	player6.stop();
+	player7.stop();
 };
 
-setSpeed = function(speed) {
-	player1.speed(speed);
-	player2.speed(speed);
-	player3.speed(speed);
-	player4.speed(speed);
-	player5.speed(speed);
-};
-
-
+// setSpeed = function(speed) {
+// 	player1.speed(speed);
+// 	player2.speed(speed);
+// 	player3.speed(speed);
+// 	player4.speed(speed);
+// 	player5.speed(speed);
+// };
