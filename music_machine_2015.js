@@ -16,7 +16,7 @@ if (Meteor.isClient) {
       if (starter ) {
         if (starter.start==1) {
           playAll();
-        } else if (starter.start == 0) {
+        } else if (starter.start === 0) {
           stopAll();
         }
       }
@@ -52,6 +52,7 @@ if (Meteor.isClient) {
 //reset all volume slider displays
         $('#sliderVol1').slider('value', 0);
         $('#sliderVol2').slider('value', 0);
+        $('#sliderVol3').slider('value', 0);
       } else if (val.start === 0) {
         Session.set('startdac', 1);
 //reset start and all volume sliders
@@ -59,6 +60,7 @@ if (Meteor.isClient) {
 //reset all volume slider displays
         $('#sliderVol1').slider('value', 1);
         $('#sliderVol2').slider('value', 1);
+        $('#sliderVol3').slider('value', 1);
       }
     }
 
@@ -94,13 +96,12 @@ if (Meteor.isClient) {
     "drums": function () {
       var starter = MusicMachine.findOne();
       if (starter) {
-        if (starter.drums==1) {
+        if (starter.drums == 1) {
           playDrums();
-        } else if (starter.drums == 0) {
+        } else if (starter.drums === 0) {
           stopDrums();
         }
       }
-
       return Session.get('drums');
     },
 
@@ -109,11 +110,10 @@ if (Meteor.isClient) {
       if (starter) {
         if (starter.bassline==1) {
           playBass();
-        } else if (starter.bassline==0) {
+        } else if (starter.bassline === 0) {
           stopBass();
         }
       }
-
       return Session.get('bass');
     },
 
@@ -126,7 +126,6 @@ if (Meteor.isClient) {
           stopArp();
         }
       }
-
       return Session.get('arp');
     },
 
@@ -147,7 +146,7 @@ if (Meteor.isClient) {
     }, //end sliderVolume1
 
     //for track2 volume slider
-    'sliderVolume2':  function() {
+    'sliderVolume2': function() {
       var slider = MusicMachine.findOne();
       if (slider) {
         setBassVolume(slider.sliderVolume2);
@@ -157,8 +156,20 @@ if (Meteor.isClient) {
       }
 
       return slider.sliderVolume2;
-    }//end sliderVolume2
+    }, //end sliderVolume2
 
+    //for track3 volume slider
+    'sliderVolume3': function() {
+      var slider = MusicMachine.findOne();
+      if (slider) {
+        setArpVolume(slider.sliderVolume3);
+        if (Session.get('sliderVolume3')) {
+          Session.set('sliderVolume3', slider.sliderVolume3);
+        }
+      }
+
+      return slider.sliderVolume3;
+    }//end sliderVolume2
 
   });//end playground helpers
 
@@ -196,24 +207,16 @@ if (Meteor.isClient) {
       "click button.myButton5": function () {
       Session.set('arp', 1);
       var val = MusicMachine.findOne({});
-      MusicMachine.update({ _id: val._id }, {$set: {arp: 1}});
-
+      MusicMachine.update({ _id: val._id }, {$set: {arp: 1, sliderVolume3: 1}});
+      $('#sliderVol3').slider('value', 1);
     },
 
       "click button.myButton6": function () {
       Session.set('arp', 0);
       var val = MusicMachine.findOne({});
-      MusicMachine.update({ _id: val._id }, {$set: {arp: 0}});
-
+      MusicMachine.update({ _id: val._id }, {$set: {arp: 0, sliderVolume3: 0}});
+      $('#sliderVol3').slider('value', 1);
     }//,
-
-    // 'click #sliderVol1': function() {
-    //   $( ".selector" ).on( "slidechange", function( event, ui ) {
-    //     Session.set('sliderVolume1', ui.value);
-    //     var val = MusicMachine.findOne({});
-    //     MusicMachine.update({ _id: val._id }, {$set: {sliderVolume1: ui.value}});
-    //   });
-    // }
 
   });
 
@@ -233,21 +236,17 @@ if (Meteor.isClient) {
         Template.instance().$('#sliderVol2').data('uiSlider').value(player.sliderVolume2);
     }, 1, { leading: false });
 
+    var handlerVol3 = _.throttle(function(event, ui) {
+        var val = MusicMachine.findOne({});
+        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume3: ui.value}});
+        Template.instance().$('#sliderVol3').data('uiSlider').value(player.sliderVolume3);
+    }, 1, { leading: false });
+
     if (player) {
       console.log('slide from mongo: ', player.slide);
       Session.set('sliderVolume1', player.sliderVolume1);
-    }
-    //global speed slider, initial render
-    if (!Template.instance().$('#slider1').data('uiSlider')) {
-      $("#slider1").slider({
-        slide: handler,
-        value: player.slide,
-        min: 0,
-        max: 100
-      });
-    } else {
-      console.log('slider.slide: ' + player.slide);
-      Template.instance().$('#slider1').slider('value', player.slide);
+      Session.set('sliderVolume2', player.sliderVolume2);
+      Session.set('sliderVolume3', player.sliderVolume3);
     }
 
     //track 1 volume slider, initial render
@@ -263,7 +262,7 @@ if (Meteor.isClient) {
       Template.instance().$('#sliderVol1').slider('value', player.sliderVolume1);
     }
 
-    //track 1 volume slider, initial render
+    //track 2 volume slider, initial render
     if (!Template.instance().$('#sliderVol2').data('uiSlider')) {
       $("#sliderVol2").slider({
         slide: handlerVol2,
@@ -271,10 +270,22 @@ if (Meteor.isClient) {
         min: 0,
         max: 10
       });
-      
     } else {
       console.log('vol2 slide value: ' + player.sliderVolume2);
       Template.instance().$('#sliderVol2').slide('value', player.sliderVolume2);
+    }
+
+    //track 3 volume slider, initial render
+    if (!Template.instance().$('#sliderVol3').data('uiSlider')) {
+      $("#sliderVol3").slider({
+        slide: handlerVol3,
+        value: player.sliderVolume3,
+        min: 0,
+        max: 10
+      });
+    } else {
+      console.log('vol3 slide value: ' + player.sliderVolume3);
+      Template.instance().$('#sliderVol3').slide('value', player.sliderVolume3);
     }
 
   }); //end Template.onRendered
@@ -311,7 +322,7 @@ if (Meteor.isServer) {
       if (MusicMachine.find().count() === 0) {
 //set initial start value to make sure dac button click would result in allplay initially
 //also initializing all volume settings so there is something to display
-      MusicMachine.insert({slide: 50, start: 0, sliderVolume1: 1, sliderVolume2: 1});
+      MusicMachine.insert({slide: 50, start: 0, sliderVolume1: 1, sliderVolume2: 1, sliderVolume3: 1});
     }
 
 }
