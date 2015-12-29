@@ -175,16 +175,16 @@ if (Meteor.isClient) {
       return Session.get('chords');
     },
 
-    "hihat": function () {
+    "drum2": function () {
       var starter = MusicMachine.findOne();
       if (starter) {
-        if (starter.hihat == 1) {
-          playHihat();
-        } else if (starter.hihat === 0) {
-          stopHihat();
+        if (starter.drum2 == 1) {
+          playDrum2();
+        } else if (starter.drum2 === 0) {
+          stopDrum2();
         }
       }
-      return Session.get('hihat');
+      return Session.get('drum2');
     },
 
     "cymbal": function () {
@@ -284,7 +284,7 @@ if (Meteor.isClient) {
     'sliderVolume7': function() {
       var slider = MusicMachine.findOne();
       if (slider) {
-        setHihatVolume(slider.sliderVolume7);
+        setDrum2Volume(slider.sliderVolume7);
         if (Session.get('sliderVolume7')) {
           Session.set('sliderVolume7', slider.sliderVolume7);
         }
@@ -297,7 +297,7 @@ if (Meteor.isClient) {
     'sliderVolume8': function() {
       var slider = MusicMachine.findOne();
       if (slider) {
-        setHihatVolume(slider.sliderVolume8);
+        setCymbalVolume(slider.sliderVolume8);
         if (Session.get('sliderVolume8')) {
           Session.set('sliderVolume8', slider.sliderVolume8);
         }
@@ -398,16 +398,16 @@ if (Meteor.isClient) {
     },
 
       "click button.btn7On": function () {
-      Session.set('hihat', 1);
+      Session.set('drum2', 1);
       var val = MusicMachine.findOne({});
-      MusicMachine.update({ _id: val._id }, {$set: {hihat: 1, sliderVolume7: 1}});
+      MusicMachine.update({ _id: val._id }, {$set: {drum2: 1, sliderVolume7: 1}});
       $('#sliderVol7').slider('value', 1);
     },
 
       "click button.btn7Off": function () {
-      Session.set('hihat', 0);
+      Session.set('drum2', 0);
       var val = MusicMachine.findOne({});
-      MusicMachine.update({ _id: val._id }, {$set: {hihat: 0, sliderVolume7: 0}});
+      MusicMachine.update({ _id: val._id }, {$set: {drum2: 0, sliderVolume7: 0}});
       $('#sliderVol7').slider('value', 0);
     },
 
@@ -478,6 +478,7 @@ if (Meteor.isClient) {
     var handlerVol8 = _.throttle(function(event, ui) {
         var val = MusicMachine.findOne({});
         MusicMachine.update({ _id: val._id }, {$set: {sliderVolume8: ui.value}});
+//Error when moving slider
         Template.instance().$('#sliderVol8').data('uiSlider').value(player.sliderVolume8);
     }, 1, { leading: false });
 
@@ -567,7 +568,7 @@ if (Meteor.isClient) {
     if (!Template.instance().$('#sliderVol6').data('uiSlider')) {
       $("#sliderVol6").slider({
         slide: handlerVol6,
-        value: player.sliderVolume5,
+        value: player.sliderVolume6,
         min: 0,
         max: 10,
         orientation: 'vertical'
@@ -581,7 +582,7 @@ if (Meteor.isClient) {
     if (!Template.instance().$('#sliderVol7').data('uiSlider')) {
       $("#sliderVol7").slider({
         slide: handlerVol7,
-        value: player.sliderVolume5,
+        value: player.sliderVolume7,
         min: 0,
         max: 10,
         orientation: 'vertical'
@@ -595,7 +596,7 @@ if (Meteor.isClient) {
     if (!Template.instance().$('#sliderVol8').data('uiSlider')) {
       $("#sliderVol8").slider({
         slide: handlerVol8,
-        value: player.sliderVolume5,
+        value: player.sliderVolume8,
         min: 0,
         max: 10,
         orientation: 'vertical'

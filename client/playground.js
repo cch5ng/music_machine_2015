@@ -30,7 +30,7 @@ player5 = maxim5.loadFile("snaredrum1.wav");
 player5.loop;
 player6 = maxim6.loadFile("chords.wav");
 player6.loop;
-player7 = maxim7.loadFile("hihat2.wav");
+player7 = maxim7.loadFile("808drum.wav");
 player7.loop;
 player8 = maxim8.loadFile("cymbal1.wav");
 player8.loop;
@@ -107,15 +107,15 @@ setChordsVolume = function(vol) {
 	player6.volume(vol);
 };
 
-playHihat = function(){
+playDrum2 = function(){
 	player7.volume(1);
 };
 
-stopHihat = function(){
+stopDrum2 = function(){
 	player7.volume(0);
 };
 
-setHihatVolume = function(vol) {
+setDrum2Volume = function(vol) {
 	player7.volume(vol);
 };
 
