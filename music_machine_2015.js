@@ -318,6 +318,19 @@ if (Meteor.isClient) {
       return slider.sliderVolume6;
     }, //end sliderVolume6
 
+    //for track6 speed slider
+    'sliderSpeed6':  function() {
+      var slider = MusicMachine.findOne();
+      if (slider) {
+        setChordsSpeed(slider.sliderSpeed6/50);
+        if (Session.get('sliderSpeed6')) {
+          Session.set('sliderSpeed6', slider.sliderSpeed6);
+        }
+      }
+
+      return slider.sliderSpeed6;
+    }, //end sliderSpeed6
+
     //for track7 volume slider
     'sliderVolume7': function() {
       var slider = MusicMachine.findOne();
@@ -534,6 +547,12 @@ if (Meteor.isClient) {
         Template.instance().$('#sliderVol6').data('uiSlider').value(player.sliderVolume6);
     }, 1, { leading: false });
 
+    var handlerSpeed6 = _.throttle(function(event, ui) {
+        var val = MusicMachine.findOne({});
+        MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed6: ui.value}});
+        Template.instance().$('#sliderSpeed6').data('uiSlider').value(player.sliderSpeed6);
+    }, 50, { leading: false });
+
     var handlerVol7 = _.throttle(function(event, ui) {
         var val = MusicMachine.findOne({});
         MusicMachine.update({ _id: val._id }, {$set: {sliderVolume7: ui.value}});
@@ -561,6 +580,7 @@ if (Meteor.isClient) {
       Session.set('sliderVolume5', player.sliderVolume5);
       Session.set('sliderSpeed5', player.sliderSpeed5);
       Session.set('sliderVolume6', player.sliderVolume6);
+      Session.set('sliderSpeed6', player.sliderSpeed6);
       Session.set('sliderVolume7', player.sliderVolume7);
       Session.set('sliderVolume8', player.sliderVolume8);
     }
@@ -717,6 +737,20 @@ if (Meteor.isClient) {
     } else {
       console.log('vol6 slide value: ' + player.sliderVolume6);
       Template.instance().$('#sliderVol6').slide('value', player.sliderVolume6);
+    }
+
+    //track 6 speed slider, initial render
+    if (!Template.instance().$('#sliderSpeed6').data('uiSlider')) {
+      $("#sliderSpeed6").slider({
+        slide: handlerSpeed6,
+        value: player.sliderSpeed6,
+        min: 0,
+        max: 100,
+        orientation: 'vertical'
+      });
+    } else {
+      console.log('speed6 slide value: ' + player.sliderSpeed6);
+      Template.instance().$('#sliderSpeed6').slider('value', player.sliderSpeed6);
     }
 
     //track 7 volume slider, initial render
