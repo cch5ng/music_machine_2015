@@ -239,6 +239,20 @@ if (Meteor.isClient) {
       return slider.sliderVolume3;
     }, //end sliderVolume3
 
+    //for track3 speed slider
+    'sliderSpeed3':  function() {
+      var slider = MusicMachine.findOne();
+      if (slider) {
+        setArpSpeed(slider.sliderSpeed3/50);
+        if (Session.get('sliderSpeed3')) {
+          Session.set('sliderSpeed3', slider.sliderSpeed3);
+        }
+      }
+
+      return slider.sliderSpeed3;
+    }, //end sliderSpeed3
+
+
     //for track4 volume slider
     'sliderVolume4': function() {
       var slider = MusicMachine.findOne();
@@ -460,6 +474,12 @@ if (Meteor.isClient) {
         Template.instance().$('#sliderVol3').data('uiSlider').value(player.sliderVolume3);
     }, 1, { leading: false });
 
+    var handlerSpeed3 = _.throttle(function(event, ui) {
+        var val = MusicMachine.findOne({});
+        MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed3: ui.value}});
+        Template.instance().$('#sliderSpeed3').data('uiSlider').value(player.sliderSpeed3);
+    }, 50, { leading: false });
+
     var handlerVol4 = _.throttle(function(event, ui) {
         var val = MusicMachine.findOne({});
         MusicMachine.update({ _id: val._id }, {$set: {sliderVolume4: ui.value}});
@@ -499,6 +519,7 @@ if (Meteor.isClient) {
       Session.set('sliderVolume2', player.sliderVolume2);
       Session.set('sliderSpeed2', player.sliderSpeed2);
       Session.set('sliderVolume3', player.sliderVolume3);
+      Session.set('sliderSpeed3', player.sliderSpeed3);
       Session.set('sliderVolume4', player.sliderVolume4);
       Session.set('sliderVolume5', player.sliderVolume5);
       Session.set('sliderVolume6', player.sliderVolume6);
@@ -574,6 +595,20 @@ if (Meteor.isClient) {
     } else {
       console.log('vol3 slide value: ' + player.sliderVolume3);
       Template.instance().$('#sliderVol3').slide('value', player.sliderVolume3);
+    }
+
+    //track 3 speed slider, initial render
+    if (!Template.instance().$('#sliderSpeed3').data('uiSlider')) {
+      $("#sliderSpeed3").slider({
+        slide: handlerSpeed3,
+        value: player.sliderSpeed3,
+        min: 0,
+        max: 100,
+        orientation: 'vertical'
+      });
+    } else {
+      console.log('speed3 slide value: ' + player.sliderSpeed3);
+      Template.instance().$('#sliderSpeed3').slider('value', player.sliderSpeed3);
     }
 
     //track 4 volume slider, initial render
