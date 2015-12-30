@@ -9,12 +9,12 @@ if (Meteor.isClient) {
   });
 
   //global helper functions
-  var fixSliderVal = function(value) {
-    var fixedVal;
-    fixedVal = Math.round(100 - value);
+  // var fixSliderVal = function(value) {
+  //   var fixedVal;
+  //   fixedVal = Math.round(100 - value);
 
-    return fixedVal;
-  };
+  //   return fixedVal;
+  // };
 
   Template.navigation.helpers({
 
@@ -68,16 +68,16 @@ if (Meteor.isClient) {
   }); //end navigation events
 
   Template.navigation.onRendered(function() {
-    var player = MusicMachine.findOne();
-    var handler = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {slide: ui.value}});
-    }, 50, { leading: false });
+    // var player = MusicMachine.findOne();
+    // var handler = _.throttle(function(event, ui) {
+    //     var val = MusicMachine.findOne({});
+    //     MusicMachine.update({ _id: val._id }, {$set: {slide: ui.value}});
+    // }, 50, { leading: false });
 
-    if (player) {
-      console.log('slide from mongo: ', player.slide);
-      Session.set('uiSlider', player.slide);
-    }
+    // if (player) {
+    //   console.log('slide from mongo: ', player.slide);
+    //   Session.set('uiSlider', player.slide);
+    // }
 
   }); //end navigation onRender
 
@@ -515,45 +515,129 @@ if (Meteor.isClient) {
     $('h2').hide();
 
 //TEST nouislider
+    var testDb = MusicMachine.findOne();
+    var startSpeed1,
+        startSpeed2,
+        startSpeed3,
+        startSpeed4,
+        startSpeed5,
+        startSpeed6,
+        startSpeed7,
+        startSpeed8;
+
+    //if (testDb) {
+      if (testDb.sliderSpeed1) {
+        startSpeed1 = testDb.sliderSpeed1;
+      } else {
+        startSpeed1 = 50;
+      }
+
+      if (testDb.sliderSpeed1) {
+        startSpeed2 = testDb.sliderSpeed2;
+      } else {
+        startSpeed2 = 50;
+      }
+
+      if (testDb.sliderSpeed1) {
+        startSpeed3 = testDb.sliderSpeed3;
+      } else {
+        startSpeed3 = 50;
+      }
+
+      if (testDb.sliderSpeed1) {
+        startSpeed4 = testDb.sliderSpeed4;
+      } else {
+        startSpeed4 = 50;
+      }
+
+      if (testDb.sliderSpeed5) {
+        startSpeed5 = testDb.sliderSpeed5;
+      } else {
+        startSpeed1 = 50;
+      }
+
+      if (testDb.sliderSpeed1) {
+        startSpeed6 = testDb.sliderSpeed6;
+      } else {
+        startSpeed6 = 50;
+      }
+
+      if (testDb.sliderSpeed1) {
+        startSpeed7 = testDb.sliderSpeed7;
+      } else {
+        startSpeed7 = 50;
+      }
+
+      if (testDb.sliderSpeed8) {
+        startSpeed8 = testDb.sliderSpeed8;
+      } else {
+        startSpeed8 = 50;
+      }
+    //}
+
+    var slider = MusicMachine.findOne();
+
+//track 1 speed slider
     this.$("#nouiSpeed1").noUiSlider({
-      start: MusicMachine.findOne().sliderSpeed1,
+      start: startSpeed1,
       orientation: 'vertical',
-      //connect: true,
+      direction: 'rtl',
       range: {
         'min': 0,
         'max': 100
       }
     }).on('slide', function (ev, val) {
       // set real values on 'slide' event
-      var fixedVal = fixSliderVal(val);
+      var fixedVal = Math.round(val);
       setDrumSpeed(fixedVal/50);
-      //if (Session.get('sliderSpeed1')) {
-        Session.set('sliderSpeed1', fixedVal);
-      //}
-      console.log('fixed val: ' + fixedVal);
-      var slider = MusicMachine.findOne();
+      Session.set('sliderSpeed1', fixedVal);
       MusicMachine.update(slider._id, {$set: {sliderSpeed1: fixedVal}});
-      //Session.set('slider', val);
-    });//.on('change', function (ev, val) {
+    }).on('change', function (ev, val) {
       // round off values on 'change' event
-      //Session.set('slider', [Math.round(val[0]), Math.round(val[1])]);
-    //});
+      var fixedVal2 = Math.round(val);
+      setDrumSpeed(fixedVal2/50);
+      Session.set('sliderSpeed1', fixedVal2);
+      MusicMachine.update(slider._id, {$set: {sliderSpeed1: fixedVal2}});
+    });
+
+//track 2 speed slider
+    this.$("#nouiSpeed2").noUiSlider({
+      start: startSpeed2,
+      orientation: 'vertical',
+      direction: 'rtl',
+      range: {
+        'min': 0,
+        'max': 100
+      }
+    }).on('slide', function (ev, val) {
+      // set real values on 'slide' event
+      var fixedVal = Math.round(val);
+      setBassSpeed(fixedVal/50);
+      Session.set('sliderSpeed2', fixedVal);
+      MusicMachine.update(slider._id, {$set: {sliderSpeed2: fixedVal}});
+    }).on('change', function (ev, val) {
+      // round off values on 'change' event
+      var fixedVal2 = Math.round(val);
+      setBassSpeed(fixedVal2/50);
+      Session.set('sliderSpeed2', fixedVal2);
+      MusicMachine.update(slider._id, {$set: {sliderSpeed2: fixedVal2}});
+    });
 
 //END TEST
 
     var player = MusicMachine.findOne();
 
-    var handlerVol1 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume1: ui.value}});
-        Template.instance().$('#sliderVol1').data('uiSlider').value(player.sliderVolume1);
-    }, 1, { leading: false });
+    // var handlerVol1 = _.throttle(function(event, ui) {
+    //     var val = MusicMachine.findOne({});
+    //     MusicMachine.update({ _id: val._id }, {$set: {sliderVolume1: ui.value}});
+    //     Template.instance().$('#sliderVol1').data('uiSlider').value(player.sliderVolume1);
+    // }, 1, { leading: false });
 
-    var handlerSpeed1 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed1: ui.value}});
-        Template.instance().$('#sliderSpeed1').data('uiSlider').value(player.sliderSpeed1);
-    }, 50, { leading: false });
+    // var handlerSpeed1 = _.throttle(function(event, ui) {
+    //     var val = MusicMachine.findOne({});
+    //     MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed1: ui.value}});
+    //     Template.instance().$('#sliderSpeed1').data('uiSlider').value(player.sliderSpeed1);
+    // }, 50, { leading: false });
 
     var handlerVol2 = _.throttle(function(event, ui) {
         var val = MusicMachine.findOne({});
@@ -644,9 +728,9 @@ if (Meteor.isClient) {
     if (player) {
       console.log('slide from mongo: ', player.slide);
       Session.set('sliderVolume1', player.sliderVolume1);
-      Session.set('sliderSpeed1', player.sliderSpeed1);
+      //Session.set('sliderSpeed1', player.sliderSpeed1);
       Session.set('sliderVolume2', player.sliderVolume2);
-      Session.set('sliderSpeed2', player.sliderSpeed2);
+      //Session.set('sliderSpeed2', player.sliderSpeed2);
       Session.set('sliderVolume3', player.sliderVolume3);
       Session.set('sliderSpeed3', player.sliderSpeed3);
       Session.set('sliderVolume4', player.sliderVolume4);
@@ -676,18 +760,18 @@ if (Meteor.isClient) {
     }
 
     //track 1 speed slider, initial render
-    if (!Template.instance().$('#sliderSpeed1').data('uiSlider')) {
-      $("#sliderSpeed1").slider({
-        slide: handlerSpeed1,
-        value: player.sliderSpeed1,
-        min: 0,
-        max: 100,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('speed1 slide value: ' + player.sliderSpeed1);
-      Template.instance().$('#sliderSpeed1').slider('value', player.sliderSpeed1);
-    }
+    // if (!Template.instance().$('#sliderSpeed1').data('uiSlider')) {
+    //   $("#sliderSpeed1").slider({
+    //     slide: handlerSpeed1,
+    //     value: player.sliderSpeed1,
+    //     min: 0,
+    //     max: 100,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('speed1 slide value: ' + player.sliderSpeed1);
+    //   Template.instance().$('#sliderSpeed1').slider('value', player.sliderSpeed1);
+    // }
 
     //track 2 volume slider, initial render
     if (!Template.instance().$('#sliderVol2').data('uiSlider')) {
@@ -704,18 +788,18 @@ if (Meteor.isClient) {
     }
 
     //track 2 speed slider, initial render
-    if (!Template.instance().$('#sliderSpeed2').data('uiSlider')) {
-      $("#sliderSpeed2").slider({
-        slide: handlerSpeed2,
-        value: player.sliderSpeed2,
-        min: 0,
-        max: 100,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('speed2 slide value: ' + player.sliderSpeed2);
-      Template.instance().$('#sliderSpeed2').slider('value', player.sliderSpeed2);
-    }
+    // if (!Template.instance().$('#sliderSpeed2').data('uiSlider')) {
+    //   $("#sliderSpeed2").slider({
+    //     slide: handlerSpeed2,
+    //     value: player.sliderSpeed2,
+    //     min: 0,
+    //     max: 100,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('speed2 slide value: ' + player.sliderSpeed2);
+    //   Template.instance().$('#sliderSpeed2').slider('value', player.sliderSpeed2);
+    // }
 
     //track 3 volume slider, initial render
     if (!Template.instance().$('#sliderVol3').data('uiSlider')) {
