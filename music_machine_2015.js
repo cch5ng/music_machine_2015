@@ -8,6 +8,14 @@ if (Meteor.isClient) {
   Meteor.startup(function () {
   });
 
+  //global helper functions
+  var fixSliderVal = function(value) {
+    var fixedVal;
+    fixedVal = Math.round(100 - value);
+
+    return fixedVal;
+  };
+
   Template.navigation.helpers({
 
     "startdac": function () {
@@ -132,7 +140,7 @@ if (Meteor.isClient) {
           stopSnaredrum();
         }
       }
-      return Session.get('vibes');
+      return Session.get('snaredrum');
     },
 
     "chords": function () {
@@ -505,6 +513,34 @@ if (Meteor.isClient) {
 
   Template.playground.onRendered(function() {
     $('h2').hide();
+
+//TEST nouislider
+    this.$("#nouiSpeed1").noUiSlider({
+      start: MusicMachine.findOne().sliderSpeed1,
+      orientation: 'vertical',
+      //connect: true,
+      range: {
+        'min': 0,
+        'max': 100
+      }
+    }).on('slide', function (ev, val) {
+      // set real values on 'slide' event
+      var fixedVal = fixSliderVal(val);
+      setDrumSpeed(fixedVal/50);
+      //if (Session.get('sliderSpeed1')) {
+        Session.set('sliderSpeed1', fixedVal);
+      //}
+      console.log('fixed val: ' + fixedVal);
+      var slider = MusicMachine.findOne();
+      MusicMachine.update(slider._id, {$set: {sliderSpeed1: fixedVal}});
+      //Session.set('slider', val);
+    });//.on('change', function (ev, val) {
+      // round off values on 'change' event
+      //Session.set('slider', [Math.round(val[0]), Math.round(val[1])]);
+    //});
+
+//END TEST
+
     var player = MusicMachine.findOne();
 
     var handlerVol1 = _.throttle(function(event, ui) {
