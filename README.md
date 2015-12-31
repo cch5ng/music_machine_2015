@@ -21,6 +21,7 @@
 * fortawesome:fontawesome
 * http
 * aldeed:http
+* browser-policy
 
 ## (Dev) Adding Slider for track
 * Requires template handler to display mongo value for the slider (for ex volume)
