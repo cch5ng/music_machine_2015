@@ -8,9 +8,12 @@ Meteor.methods({
 	console.log('this should make xhr request to ' + filename);
 
 	var url = 'http://chc_machina_musica2.meteor.com/' + filename;
-	var result = HTTP.call("GET", url, {encoding: null}, function(error, result) {
+	console.log('url: ' + url);
+	//var result = 
+	HTTP.call("GET", url, {responseType: 'arraybuffer'}, function(error, result) {
 		if (!error) {
-			return result;
+			console.log('type of: ' + typeof result.content);
+			return result.content;
 		} else {
 			console.log('error: ' + error);
 		}

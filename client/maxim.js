@@ -42,11 +42,14 @@ Maxim = function() {
       console.log('got drum1');
       if (result) {
         console.log('got a result');
+        console.log('type of: ' + typeof result);
+      } else {
+        console.log('error: ' + err);
       }
       //console.log(result);
 
 //copy over contents of original onload() function
-      context.decodeAudioData(result.content, function(buffer) {
+      context.decodeAudioData(result, function(buffer) {
         myAudioBuffer = buffer;
         //       alert("sound decoded"); //test
         source = context.createBufferSource();
