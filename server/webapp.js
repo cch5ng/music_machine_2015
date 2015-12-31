@@ -4,9 +4,19 @@
 
 //TEST
 Meteor.methods({
-  drum1: function (filename) {
+  getAudio: function (filename) {
 	console.log('this should make xhr request to ' + filename);
-	return "some return value";
+
+	var url = 'http://chc_machina_musica2.meteor.com/' + filename;
+	var result = HTTP.call("GET", url, {encoding: null}, function(error, result) {
+		if (!error) {
+			return result;
+		} else {
+			console.log('error: ' + error);
+		}
+
+	});
+	//return "some return value";
   }//,
 });
 

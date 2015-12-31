@@ -38,16 +38,15 @@ Maxim = function() {
     var FFTData = null;
 
 //TEST
-    Meteor.call('drum1', filename, function(err, result) {
+    Meteor.call('getAudio', filename, function(err, result) {
       console.log('got drum1');
-      console.log(result);
-    });
+      if (result) {
+        console.log('got a result');
+      }
+      //console.log(result);
 
-    audio.open('GET', filename, true);
-    audio.responseType = 'arraybuffer';
-    audio.onload = function() {
-      //      alert("sound loaded"); //test
-      context.decodeAudioData(audio.response, function(buffer) {
+//copy over contents of original onload() function
+      context.decodeAudioData(result.content, function(buffer) {
         myAudioBuffer = buffer;
         //       alert("sound decoded"); //test
         source = context.createBufferSource();
@@ -64,11 +63,36 @@ Maxim = function() {
         gainNode.gain.value = volume;
         gainNode.connect(context.destination);
         sampleLength = source.buffer.duration*1000;
-      }
-      );
-    }
+      });
 
-    audio.send();
+    });
+
+    // audio.open('GET', filename, true);
+    // audio.responseType = 'arraybuffer';
+    // audio.onload = function() {
+    //   //      alert("sound loaded"); //test
+    //   context.decodeAudioData(audio.response, function(buffer) {
+    //     myAudioBuffer = buffer;
+    //     //       alert("sound decoded"); //test
+    //     source = context.createBufferSource();
+    //     gainNode = context.createGain();
+    //     filter = context.createBiquadFilter();
+    //     analyser = context.createAnalyser();
+    //     filter.type = "lowpass";
+    //     filter.frequency.value = 20000;
+    //     envTime = 1.0;
+    //     source.buffer = myAudioBuffer;
+    //     source.playbackRate.value = currentSpeed;
+    //     source.connect(filter);
+    //     filter.connect(gainNode);
+    //     gainNode.gain.value = volume;
+    //     gainNode.connect(context.destination);
+    //     sampleLength = source.buffer.duration*1000;
+    //   }
+    //   );
+    // }
+
+    //audio.send();
     audio.isPlaying = function() {
 
       return playing;
