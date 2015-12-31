@@ -36,6 +36,13 @@ Maxim = function() {
     var flux = 0;
     var averageSpectrumPower = 0;
     var FFTData = null;
+
+//TEST
+    Meteor.call('drum1', filename, function(err, result) {
+      console.log('got drum1');
+      console.log(result);
+    });
+
     audio.open('GET', filename, true);
     audio.responseType = 'arraybuffer';
     audio.onload = function() {
