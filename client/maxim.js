@@ -38,18 +38,46 @@ Maxim = function() {
     var FFTData = null;
 
 //TEST
-    Meteor.call('getAudio', filename, function(err, result) {
-      console.log('got drum1');
-      if (result) {
-        console.log('got a result');
-        console.log('type of: ' + typeof result);
-      } else {
-        console.log('error: ' + err);
-      }
-      //console.log(result);
+//     Meteor.call('getAudio', filename, function(err, result) {
+//       console.log('got drum1');
+//       if (result) {
+//         console.log('got a result');
+//         console.log('type of: ' + typeof result);
+//       } else {
+//         console.log('error: ' + err);
+//       }
+//       //console.log(result);
 
-//copy over contents of original onload() function
-      context.decodeAudioData(result, function(buffer) {
+// //copy over contents of original onload() function
+//       context.decodeAudioData(result.content, function(buffer) {
+//         myAudioBuffer = buffer;
+//         //       alert("sound decoded"); //test
+//         source = context.createBufferSource();
+//         gainNode = context.createGain();
+//         filter = context.createBiquadFilter();
+//         analyser = context.createAnalyser();
+//         filter.type = "lowpass";
+//         filter.frequency.value = 20000;
+//         envTime = 1.0;
+//         source.buffer = myAudioBuffer;
+//         source.playbackRate.value = currentSpeed;
+//         source.connect(filter);
+//         filter.connect(gainNode);
+//         gainNode.gain.value = volume;
+//         gainNode.connect(context.destination);
+//         sampleLength = source.buffer.duration*1000;
+//       });
+
+//     });
+
+//ORIGINAL Maxim.js
+    var url = 'http://chc_machina_musica2.meteor.com/' + filename;
+    audio.open('GET', url, true);
+    //audio.open('GET', filename, true);
+    audio.responseType = 'arraybuffer';
+    audio.onload = function() {
+      //      alert("sound loaded"); //test
+      context.decodeAudioData(audio.response, function(buffer) {
         myAudioBuffer = buffer;
         //       alert("sound decoded"); //test
         source = context.createBufferSource();
@@ -66,38 +94,12 @@ Maxim = function() {
         gainNode.gain.value = volume;
         gainNode.connect(context.destination);
         sampleLength = source.buffer.duration*1000;
-      });
-
-    });
-
-    // audio.open('GET', filename, true);
-    // audio.responseType = 'arraybuffer';
-    // audio.onload = function() {
-    //   //      alert("sound loaded"); //test
-    //   context.decodeAudioData(audio.response, function(buffer) {
-    //     myAudioBuffer = buffer;
-    //     //       alert("sound decoded"); //test
-    //     source = context.createBufferSource();
-    //     gainNode = context.createGain();
-    //     filter = context.createBiquadFilter();
-    //     analyser = context.createAnalyser();
-    //     filter.type = "lowpass";
-    //     filter.frequency.value = 20000;
-    //     envTime = 1.0;
-    //     source.buffer = myAudioBuffer;
-    //     source.playbackRate.value = currentSpeed;
-    //     source.connect(filter);
-    //     filter.connect(gainNode);
-    //     gainNode.gain.value = volume;
-    //     gainNode.connect(context.destination);
-    //     sampleLength = source.buffer.duration*1000;
-    //   }
-    //   );
-    // }
+      }
+      );
+    }
 
     //audio.send();
     audio.isPlaying = function() {
-
       return playing;
     }
 
@@ -106,16 +108,13 @@ Maxim = function() {
     }
 
     audio.cue = function(time) {
-
-  audio.stop();
+      audio.stop();
       startTime=time/1000;
     }
 
     audio.speed = function(speed) {
       if (source) {
-
         currentSpeed = speed;
-
         source.playbackRate.value = speed;
       }
     }
@@ -132,9 +131,7 @@ Maxim = function() {
     }
 
     audio.volume = function(gain) {
-
       volume=gain;
-
       if (playing) {
         gainNode.gain.value = volume;
       }
@@ -157,12 +154,8 @@ Maxim = function() {
         gainNode.gain.value = volume;
         //          alert("source connected"); //test
 
-   
         if (isLooping)source.loop = true;
-       
         source.start(0);
-
-       
         playing=true;
       }
       if (analysing==true && playing) {
@@ -180,13 +173,11 @@ Maxim = function() {
     }
 
     audio.setFilter = function(freq, res) {
-
       filter.frequency.value = freq;
       filter.Q.value = res;
     }
 
     audio.filterRamp = function(freq, envTime) {
-
       filter.frequency.cancelScheduledValues(context.currentTime);
       filter.frequency.linearRampToValueAtTime(filter.frequency.value, context.currentTime);   // THIS IS THE CHANGE FROM PREVIOUS CODE EXAMPLE
       filter.frequency.linearRampToValueAtTime(freq, context.currentTime + envTime/1000.);
@@ -194,14 +185,12 @@ Maxim = function() {
 
     //This function allows you to set the amplitude of the waveform
     audio.setAmplitude = function(amplitude) {
-
       gainNode.gain.cancelScheduledValues(context.currentTime);
       gainNode.gain.linearRampToValueAtTime(gainNode.gain.value, context.currentTime);
       gainNode.gain.linearRampToValueAtTime(amplitude, context.currentTime + 10);
     }
 
     audio.ramp = function(amplitude, envTime) {
-
       gainNode.gain.cancelScheduledValues(context.currentTime);
       gainNode.gain.linearRampToValueAtTime(gainNode.gain.value, context.currentTime);
       gainNode.gain.linearRampToValueAtTime(amplitude, context.currentTime + envTime/1000.);
