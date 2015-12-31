@@ -98,7 +98,8 @@ Maxim = function() {
       );
     }
 
-    //audio.send();
+    audio.send();
+
     audio.isPlaying = function() {
       return playing;
     }
