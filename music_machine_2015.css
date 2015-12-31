@@ -164,7 +164,21 @@ header .hide-completed {
 
 .slider {
   margin-top: 15px;
-  height: 175px;
+  height: 140px;
+}
+
+/* overwriting nouislider styles */
+.noUi-vertical {
+  width: 12px;
+  background-color: #fff;
+  border-color: #aaa;
+}
+
+.noUi-vertical .noUi-handle {
+  width: 18px;
+  height: 18px;
+  left: -4px;
+  top: -8px;
 }
 
 /* footer */
