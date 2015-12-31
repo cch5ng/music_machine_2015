@@ -4,6 +4,30 @@ var connectHandler = WebApp.connectHandlers; // get meteor-core's connect-implem
 
 Meteor.startup(function () {
 
+	//TEST security policies
+	BrowserPolicy.content.allowInlineStyles();
+	BrowserPolicy.content.allowFontDataUrl();
+	BrowserPolicy.content.allowMediaOrigin('*.meteor.com');
+	BrowserPolicy.content.allowMediaSameOrigin();
+	//BrowserPolicy.content.allowSameOriginForAll();
+//allows permissions to get external resources, but not working as well for specific content types
+//i.e. allowFontOrigin(origin) is not working whereas allowOriginForAll(origin) does work
+	BrowserPolicy.content.allowOriginForAll('*.meteor.com', 'https://maxcdn.bootstrapcdn.com', 'code.jquery.com', 'https://fonts.googleapis.com', 'ajax.googleapis.com');
+	BrowserPolicy.content.allowOriginForAll('ajax.googleapis.com');
+	BrowserPolicy.content.allowOriginForAll('fonts.googleapis.com');
+	BrowserPolicy.content.allowOriginForAll('https://maxcdn.bootstrapcdn.com');
+	BrowserPolicy.content.allowOriginForAll('fonts.gstatic.com');
+	BrowserPolicy.content.allowConnectOrigin("*.meteor.com");
+
+	// Listen to incoming HTTP requests, can only be used on the server
+	connectHandler.use("/public", function(req, res, next) {
+		res.setHeader('Access-Control-Allow-Origin', '*');
+		res.setHeader("Access-Control-Allow-Methods", "GET");
+		res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Requested-With, Origin');
+		//return next();
+	});
+	//END TEST SECURITY
+
 	//TEST
 	Meteor.methods({
 	  getAudio: function (filename) {
@@ -25,13 +49,6 @@ Meteor.startup(function () {
 	  }//,
 	});
 
-		// Listen to incoming HTTP requests, can only be used on the server
-		connectHandler.use("/public", function(req, res, next) {
-			res.setHeader('Access-Control-Allow-Origin', '*');
-			res.setHeader("Access-Control-Allow-Methods", "GET");
-			res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Requested-With, Origin');
-			//return next();
-		});
 
 });
 
