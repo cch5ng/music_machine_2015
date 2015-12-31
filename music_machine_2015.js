@@ -648,13 +648,13 @@ if (Meteor.isClient) {
 
 //END TEST
 
-    var player = MusicMachine.findOne();
+    // var player = MusicMachine.findOne();
 
-    var handlerVol1 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume1: ui.value}});
-        Template.instance().$('#sliderVol1').data('uiSlider').value(player.sliderVolume1);
-    }, 1, { leading: false });
+    // var handlerVol1 = _.throttle(function(event, ui) {
+    //     var val = MusicMachine.findOne({});
+    //     MusicMachine.update({ _id: val._id }, {$set: {sliderVolume1: ui.value}});
+    //     Template.instance().$('#sliderVol1').data('uiSlider').value(player.sliderVolume1);
+    // }, 1, { leading: false });
 
     // var handlerSpeed1 = _.throttle(function(event, ui) {
     //     var val = MusicMachine.findOne({});
@@ -662,11 +662,11 @@ if (Meteor.isClient) {
     //     Template.instance().$('#sliderSpeed1').data('uiSlider').value(player.sliderSpeed1);
     // }, 50, { leading: false });
 
-    var handlerVol2 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume2: ui.value}});
-        Template.instance().$('#sliderVol2').data('uiSlider').value(player.sliderVolume2);
-    }, 1, { leading: false });
+    // var handlerVol2 = _.throttle(function(event, ui) {
+    //     var val = MusicMachine.findOne({});
+    //     MusicMachine.update({ _id: val._id }, {$set: {sliderVolume2: ui.value}});
+    //     Template.instance().$('#sliderVol2').data('uiSlider').value(player.sliderVolume2);
+    // }, 1, { leading: false });
 
     // var handlerSpeed2 = _.throttle(function(event, ui) {
     //     var val = MusicMachine.findOne({});
@@ -674,11 +674,11 @@ if (Meteor.isClient) {
     //     Template.instance().$('#sliderSpeed2').data('uiSlider').value(player.sliderSpeed2);
     // }, 50, { leading: false });
 
-    var handlerVol3 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume3: ui.value}});
-        Template.instance().$('#sliderVol3').data('uiSlider').value(player.sliderVolume3);
-    }, 1, { leading: false });
+    // var handlerVol3 = _.throttle(function(event, ui) {
+    //     var val = MusicMachine.findOne({});
+    //     MusicMachine.update({ _id: val._id }, {$set: {sliderVolume3: ui.value}});
+    //     Template.instance().$('#sliderVol3').data('uiSlider').value(player.sliderVolume3);
+    // }, 1, { leading: false });
 
     // var handlerSpeed3 = _.throttle(function(event, ui) {
     //     var val = MusicMachine.findOne({});
@@ -686,101 +686,101 @@ if (Meteor.isClient) {
     //     Template.instance().$('#sliderSpeed3').data('uiSlider').value(player.sliderSpeed3);
     // }, 50, { leading: false });
 
-    var handlerVol4 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume4: ui.value}});
-        Template.instance().$('#sliderVol4').data('uiSlider').value(player.sliderVolume4);
-    }, 1, { leading: false });
+//     var handlerVol4 = _.throttle(function(event, ui) {
+//         var val = MusicMachine.findOne({});
+//         MusicMachine.update({ _id: val._id }, {$set: {sliderVolume4: ui.value}});
+//         Template.instance().$('#sliderVol4').data('uiSlider').value(player.sliderVolume4);
+//     }, 1, { leading: false });
 
-    var handlerSpeed4 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed4: ui.value}});
-        Template.instance().$('#sliderSpeed4').data('uiSlider').value(player.sliderSpeed4);
-    }, 50, { leading: false });
+//     var handlerSpeed4 = _.throttle(function(event, ui) {
+//         var val = MusicMachine.findOne({});
+//         MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed4: ui.value}});
+//         Template.instance().$('#sliderSpeed4').data('uiSlider').value(player.sliderSpeed4);
+//     }, 50, { leading: false });
 
-    var handlerVol5 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume5: ui.value}});
-        Template.instance().$('#sliderVol5').data('uiSlider').value(player.sliderVolume5);
-    }, 1, { leading: false });
+//     var handlerVol5 = _.throttle(function(event, ui) {
+//         var val = MusicMachine.findOne({});
+//         MusicMachine.update({ _id: val._id }, {$set: {sliderVolume5: ui.value}});
+//         Template.instance().$('#sliderVol5').data('uiSlider').value(player.sliderVolume5);
+//     }, 1, { leading: false });
 
-    var handlerSpeed5 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed5: ui.value}});
-        Template.instance().$('#sliderSpeed5').data('uiSlider').value(player.sliderSpeed5);
-    }, 50, { leading: false });
+//     var handlerSpeed5 = _.throttle(function(event, ui) {
+//         var val = MusicMachine.findOne({});
+//         MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed5: ui.value}});
+//         Template.instance().$('#sliderSpeed5').data('uiSlider').value(player.sliderSpeed5);
+//     }, 50, { leading: false });
 
-    var handlerVol6 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume6: ui.value}});
-        Template.instance().$('#sliderVol6').data('uiSlider').value(player.sliderVolume6);
-    }, 1, { leading: false });
+//     var handlerVol6 = _.throttle(function(event, ui) {
+//         var val = MusicMachine.findOne({});
+//         MusicMachine.update({ _id: val._id }, {$set: {sliderVolume6: ui.value}});
+//         Template.instance().$('#sliderVol6').data('uiSlider').value(player.sliderVolume6);
+//     }, 1, { leading: false });
 
-    var handlerSpeed6 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed6: ui.value}});
-        Template.instance().$('#sliderSpeed6').data('uiSlider').value(player.sliderSpeed6);
-    }, 50, { leading: false });
+//     var handlerSpeed6 = _.throttle(function(event, ui) {
+//         var val = MusicMachine.findOne({});
+//         MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed6: ui.value}});
+//         Template.instance().$('#sliderSpeed6').data('uiSlider').value(player.sliderSpeed6);
+//     }, 50, { leading: false });
 
-    var handlerVol7 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume7: ui.value}});
-//Error when moving slider
-        Template.instance().$('#sliderVol7').data('uiSlider').value(player.sliderVolume7);
-    }, 1, { leading: false });
+//     var handlerVol7 = _.throttle(function(event, ui) {
+//         var val = MusicMachine.findOne({});
+//         MusicMachine.update({ _id: val._id }, {$set: {sliderVolume7: ui.value}});
+// //Error when moving slider
+//         Template.instance().$('#sliderVol7').data('uiSlider').value(player.sliderVolume7);
+//     }, 1, { leading: false });
 
-    var handlerSpeed7 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed7: ui.value}});
-        Template.instance().$('#sliderSpeed7').data('uiSlider').value(player.sliderSpeed7);
-    }, 50, { leading: false });
+//     var handlerSpeed7 = _.throttle(function(event, ui) {
+//         var val = MusicMachine.findOne({});
+//         MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed7: ui.value}});
+//         Template.instance().$('#sliderSpeed7').data('uiSlider').value(player.sliderSpeed7);
+//     }, 50, { leading: false });
 
-    var handlerVol8 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderVolume8: ui.value}});
-//Error when moving slider
-        Template.instance().$('#sliderVol8').data('uiSlider').value(player.sliderVolume8);
-    }, 1, { leading: false });
+//     var handlerVol8 = _.throttle(function(event, ui) {
+//         var val = MusicMachine.findOne({});
+//         MusicMachine.update({ _id: val._id }, {$set: {sliderVolume8: ui.value}});
+// //Error when moving slider
+//         Template.instance().$('#sliderVol8').data('uiSlider').value(player.sliderVolume8);
+//     }, 1, { leading: false });
 
-    var handlerSpeed8 = _.throttle(function(event, ui) {
-        var val = MusicMachine.findOne({});
-        MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed8: ui.value}});
-        Template.instance().$('#sliderSpeed8').data('uiSlider').value(player.sliderSpeed8);
-    }, 50, { leading: false });
+//     var handlerSpeed8 = _.throttle(function(event, ui) {
+//         var val = MusicMachine.findOne({});
+//         MusicMachine.update({ _id: val._id }, {$set: {sliderSpeed8: ui.value}});
+//         Template.instance().$('#sliderSpeed8').data('uiSlider').value(player.sliderSpeed8);
+//     }, 50, { leading: false });
 
-    if (player) {
-      console.log('slide from mongo: ', player.slide);
-      Session.set('sliderVolume1', player.sliderVolume1);
-      //Session.set('sliderSpeed1', player.sliderSpeed1);
-      Session.set('sliderVolume2', player.sliderVolume2);
-      //Session.set('sliderSpeed2', player.sliderSpeed2);
-      Session.set('sliderVolume3', player.sliderVolume3);
-      // Session.set('sliderSpeed3', player.sliderSpeed3);
-      Session.set('sliderVolume4', player.sliderVolume4);
-      Session.set('sliderSpeed4', player.sliderSpeed4);
-      Session.set('sliderVolume5', player.sliderVolume5);
-      Session.set('sliderSpeed5', player.sliderSpeed5);
-      Session.set('sliderVolume6', player.sliderVolume6);
-      Session.set('sliderSpeed6', player.sliderSpeed6);
-      Session.set('sliderVolume7', player.sliderVolume7);
-      Session.set('sliderSpeed7', player.sliderSpeed7);
-      Session.set('sliderVolume8', player.sliderVolume8);
-      Session.set('sliderSpeed8', player.sliderSpeed8);
-    }
+//     if (player) {
+//       console.log('slide from mongo: ', player.slide);
+//       Session.set('sliderVolume1', player.sliderVolume1);
+//       //Session.set('sliderSpeed1', player.sliderSpeed1);
+//       Session.set('sliderVolume2', player.sliderVolume2);
+//       //Session.set('sliderSpeed2', player.sliderSpeed2);
+//       Session.set('sliderVolume3', player.sliderVolume3);
+//       // Session.set('sliderSpeed3', player.sliderSpeed3);
+//       Session.set('sliderVolume4', player.sliderVolume4);
+//       Session.set('sliderSpeed4', player.sliderSpeed4);
+//       Session.set('sliderVolume5', player.sliderVolume5);
+//       Session.set('sliderSpeed5', player.sliderSpeed5);
+//       Session.set('sliderVolume6', player.sliderVolume6);
+//       Session.set('sliderSpeed6', player.sliderSpeed6);
+//       Session.set('sliderVolume7', player.sliderVolume7);
+//       Session.set('sliderSpeed7', player.sliderSpeed7);
+//       Session.set('sliderVolume8', player.sliderVolume8);
+//       Session.set('sliderSpeed8', player.sliderSpeed8);
+//     }
 
-    //track 1 volume slider, initial render
-    if (!Template.instance().$('#sliderVol1').data('uiSlider')) {
-      $("#sliderVol1").slider({
-        slide: handlerVol1,
-        value: player.sliderVolume1,
-        min: 0,
-        max: 10,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('vol1 slide value: ' + player.sliderVolume1);
-      Template.instance().$('#sliderVol1').slider('value', player.sliderVolume1);
-    }
+//     //track 1 volume slider, initial render
+//     if (!Template.instance().$('#sliderVol1').data('uiSlider')) {
+//       $("#sliderVol1").slider({
+//         slide: handlerVol1,
+//         value: player.sliderVolume1,
+//         min: 0,
+//         max: 10,
+//         orientation: 'vertical'
+//       });
+//     } else {
+//       console.log('vol1 slide value: ' + player.sliderVolume1);
+//       Template.instance().$('#sliderVol1').slider('value', player.sliderVolume1);
+//     }
 
     //track 1 speed slider, initial render
     // if (!Template.instance().$('#sliderSpeed1').data('uiSlider')) {
@@ -796,19 +796,19 @@ if (Meteor.isClient) {
     //   Template.instance().$('#sliderSpeed1').slider('value', player.sliderSpeed1);
     // }
 
-    //track 2 volume slider, initial render
-    if (!Template.instance().$('#sliderVol2').data('uiSlider')) {
-      $("#sliderVol2").slider({
-        slide: handlerVol2,
-        value: player.sliderVolume2,
-        min: 0,
-        max: 10,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('vol2 slide value: ' + player.sliderVolume2);
-      Template.instance().$('#sliderVol2').slide('value', player.sliderVolume2);
-    }
+    // //track 2 volume slider, initial render
+    // if (!Template.instance().$('#sliderVol2').data('uiSlider')) {
+    //   $("#sliderVol2").slider({
+    //     slide: handlerVol2,
+    //     value: player.sliderVolume2,
+    //     min: 0,
+    //     max: 10,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('vol2 slide value: ' + player.sliderVolume2);
+    //   Template.instance().$('#sliderVol2').slide('value', player.sliderVolume2);
+    // }
 
     //track 2 speed slider, initial render
     // if (!Template.instance().$('#sliderSpeed2').data('uiSlider')) {
@@ -824,19 +824,19 @@ if (Meteor.isClient) {
     //   Template.instance().$('#sliderSpeed2').slider('value', player.sliderSpeed2);
     // }
 
-    //track 3 volume slider, initial render
-    if (!Template.instance().$('#sliderVol3').data('uiSlider')) {
-      $("#sliderVol3").slider({
-        slide: handlerVol3,
-        value: player.sliderVolume3,
-        min: 0,
-        max: 10,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('vol3 slide value: ' + player.sliderVolume3);
-      Template.instance().$('#sliderVol3').slide('value', player.sliderVolume3);
-    }
+    // //track 3 volume slider, initial render
+    // if (!Template.instance().$('#sliderVol3').data('uiSlider')) {
+    //   $("#sliderVol3").slider({
+    //     slide: handlerVol3,
+    //     value: player.sliderVolume3,
+    //     min: 0,
+    //     max: 10,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('vol3 slide value: ' + player.sliderVolume3);
+    //   Template.instance().$('#sliderVol3').slide('value', player.sliderVolume3);
+    // }
 
     //track 3 speed slider, initial render
     // if (!Template.instance().$('#sliderSpeed3').data('uiSlider')) {
@@ -852,145 +852,145 @@ if (Meteor.isClient) {
     //   Template.instance().$('#sliderSpeed3').slider('value', player.sliderSpeed3);
     // }
 
-    //track 4 volume slider, initial render
-    if (!Template.instance().$('#sliderVol4').data('uiSlider')) {
-      $("#sliderVol4").slider({
-        slide: handlerVol4,
-        value: player.sliderVolume4,
-        min: 0,
-        max: 10,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('vol4 slide value: ' + player.sliderVolume4);
-      Template.instance().$('#sliderVol4').slide('value', player.sliderVolume4);
-    }
+    // //track 4 volume slider, initial render
+    // if (!Template.instance().$('#sliderVol4').data('uiSlider')) {
+    //   $("#sliderVol4").slider({
+    //     slide: handlerVol4,
+    //     value: player.sliderVolume4,
+    //     min: 0,
+    //     max: 10,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('vol4 slide value: ' + player.sliderVolume4);
+    //   Template.instance().$('#sliderVol4').slide('value', player.sliderVolume4);
+    // }
 
-    //track 4 speed slider, initial render
-    if (!Template.instance().$('#sliderSpeed4').data('uiSlider')) {
-      $("#sliderSpeed4").slider({
-        slide: handlerSpeed4,
-        value: player.sliderSpeed4,
-        min: 0,
-        max: 100,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('speed4 slide value: ' + player.sliderSpeed4);
-      Template.instance().$('#sliderSpeed4').slider('value', player.sliderSpeed4);
-    }
+    // //track 4 speed slider, initial render
+    // if (!Template.instance().$('#sliderSpeed4').data('uiSlider')) {
+    //   $("#sliderSpeed4").slider({
+    //     slide: handlerSpeed4,
+    //     value: player.sliderSpeed4,
+    //     min: 0,
+    //     max: 100,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('speed4 slide value: ' + player.sliderSpeed4);
+    //   Template.instance().$('#sliderSpeed4').slider('value', player.sliderSpeed4);
+    // }
 
-    //track 5 volume slider, initial render
-    if (!Template.instance().$('#sliderVol5').data('uiSlider')) {
-      $("#sliderVol5").slider({
-        slide: handlerVol5,
-        value: player.sliderVolume5,
-        min: 0,
-        max: 10,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('vol5 slide value: ' + player.sliderVolume5);
-      Template.instance().$('#sliderVol5').slide('value', player.sliderVolume5);
-    }
+    // //track 5 volume slider, initial render
+    // if (!Template.instance().$('#sliderVol5').data('uiSlider')) {
+    //   $("#sliderVol5").slider({
+    //     slide: handlerVol5,
+    //     value: player.sliderVolume5,
+    //     min: 0,
+    //     max: 10,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('vol5 slide value: ' + player.sliderVolume5);
+    //   Template.instance().$('#sliderVol5').slide('value', player.sliderVolume5);
+    // }
 
-    //track 5 speed slider, initial render
-    if (!Template.instance().$('#sliderSpeed5').data('uiSlider')) {
-      $("#sliderSpeed5").slider({
-        slide: handlerSpeed5,
-        value: player.sliderSpeed5,
-        min: 0,
-        max: 100,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('speed5 slide value: ' + player.sliderSpeed5);
-      Template.instance().$('#sliderSpeed5').slider('value', player.sliderSpeed5);
-    }
+    // //track 5 speed slider, initial render
+    // if (!Template.instance().$('#sliderSpeed5').data('uiSlider')) {
+    //   $("#sliderSpeed5").slider({
+    //     slide: handlerSpeed5,
+    //     value: player.sliderSpeed5,
+    //     min: 0,
+    //     max: 100,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('speed5 slide value: ' + player.sliderSpeed5);
+    //   Template.instance().$('#sliderSpeed5').slider('value', player.sliderSpeed5);
+    // }
 
-    //track 6 volume slider, initial render
-    if (!Template.instance().$('#sliderVol6').data('uiSlider')) {
-      $("#sliderVol6").slider({
-        slide: handlerVol6,
-        value: player.sliderVolume6,
-        min: 0,
-        max: 10,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('vol6 slide value: ' + player.sliderVolume6);
-      Template.instance().$('#sliderVol6').slide('value', player.sliderVolume6);
-    }
+    // //track 6 volume slider, initial render
+    // if (!Template.instance().$('#sliderVol6').data('uiSlider')) {
+    //   $("#sliderVol6").slider({
+    //     slide: handlerVol6,
+    //     value: player.sliderVolume6,
+    //     min: 0,
+    //     max: 10,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('vol6 slide value: ' + player.sliderVolume6);
+    //   Template.instance().$('#sliderVol6').slide('value', player.sliderVolume6);
+    // }
 
-    //track 6 speed slider, initial render
-    if (!Template.instance().$('#sliderSpeed6').data('uiSlider')) {
-      $("#sliderSpeed6").slider({
-        slide: handlerSpeed6,
-        value: player.sliderSpeed6,
-        min: 0,
-        max: 100,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('speed6 slide value: ' + player.sliderSpeed6);
-      Template.instance().$('#sliderSpeed6').slider('value', player.sliderSpeed6);
-    }
+    // //track 6 speed slider, initial render
+    // if (!Template.instance().$('#sliderSpeed6').data('uiSlider')) {
+    //   $("#sliderSpeed6").slider({
+    //     slide: handlerSpeed6,
+    //     value: player.sliderSpeed6,
+    //     min: 0,
+    //     max: 100,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('speed6 slide value: ' + player.sliderSpeed6);
+    //   Template.instance().$('#sliderSpeed6').slider('value', player.sliderSpeed6);
+    // }
 
-    //track 7 volume slider, initial render
-    if (!Template.instance().$('#sliderVol7').data('uiSlider')) {
-      $("#sliderVol7").slider({
-        slide: handlerVol7,
-        value: player.sliderVolume7,
-        min: 0,
-        max: 10,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('vol7 slide value: ' + player.sliderVolume7);
-      Template.instance().$('#sliderVol7').slide('value', player.sliderVolume7);
-    }
+    // //track 7 volume slider, initial render
+    // if (!Template.instance().$('#sliderVol7').data('uiSlider')) {
+    //   $("#sliderVol7").slider({
+    //     slide: handlerVol7,
+    //     value: player.sliderVolume7,
+    //     min: 0,
+    //     max: 10,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('vol7 slide value: ' + player.sliderVolume7);
+    //   Template.instance().$('#sliderVol7').slide('value', player.sliderVolume7);
+    // }
 
-    //track 7 speed slider, initial render
-    if (!Template.instance().$('#sliderSpeed7').data('uiSlider')) {
-      $("#sliderSpeed7").slider({
-        slide: handlerSpeed7,
-        value: player.sliderSpeed7,
-        min: 0,
-        max: 100,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('speed7 slide value: ' + player.sliderSpeed7);
-      Template.instance().$('#sliderSpeed7').slider('value', player.sliderSpeed7);
-    }
+    // //track 7 speed slider, initial render
+    // if (!Template.instance().$('#sliderSpeed7').data('uiSlider')) {
+    //   $("#sliderSpeed7").slider({
+    //     slide: handlerSpeed7,
+    //     value: player.sliderSpeed7,
+    //     min: 0,
+    //     max: 100,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('speed7 slide value: ' + player.sliderSpeed7);
+    //   Template.instance().$('#sliderSpeed7').slider('value', player.sliderSpeed7);
+    // }
 
-    //track 8 volume slider, initial render
-    if (!Template.instance().$('#sliderVol8').data('uiSlider')) {
-      $("#sliderVol8").slider({
-        slide: handlerVol8,
-        value: player.sliderVolume8,
-        min: 0,
-        max: 10,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('vol8 slide value: ' + player.sliderVolume8);
-      Template.instance().$('#sliderVol8').slide('value', player.sliderVolume8);
-    }
+    // //track 8 volume slider, initial render
+    // if (!Template.instance().$('#sliderVol8').data('uiSlider')) {
+    //   $("#sliderVol8").slider({
+    //     slide: handlerVol8,
+    //     value: player.sliderVolume8,
+    //     min: 0,
+    //     max: 10,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('vol8 slide value: ' + player.sliderVolume8);
+    //   Template.instance().$('#sliderVol8').slide('value', player.sliderVolume8);
+    // }
 
-    //track 8 speed slider, initial render
-    if (!Template.instance().$('#sliderSpeed8').data('uiSlider')) {
-      $("#sliderSpeed8").slider({
-        slide: handlerSpeed8,
-        value: player.sliderSpeed8,
-        min: 0,
-        max: 100,
-        orientation: 'vertical'
-      });
-    } else {
-      console.log('speed8 slide value: ' + player.sliderSpeed8);
-      Template.instance().$('#sliderSpeed8').slider('value', player.sliderSpeed8);
-    }
+    // //track 8 speed slider, initial render
+    // if (!Template.instance().$('#sliderSpeed8').data('uiSlider')) {
+    //   $("#sliderSpeed8").slider({
+    //     slide: handlerSpeed8,
+    //     value: player.sliderSpeed8,
+    //     min: 0,
+    //     max: 100,
+    //     orientation: 'vertical'
+    //   });
+    // } else {
+    //   console.log('speed8 slide value: ' + player.sliderSpeed8);
+    //   Template.instance().$('#sliderSpeed8').slider('value', player.sliderSpeed8);
+    // }
 
   }); //end Template.onRendered
 
