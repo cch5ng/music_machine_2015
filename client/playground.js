@@ -36,7 +36,7 @@ player8 = maxim8.loadFile("cymbal1.wav");
 player8.loop;
 
 playDrums = function(){
-	player1.volume(1);
+	player1.volume(Session.get('sliderVolume1'));
 };
 
 stopDrums = function(){
