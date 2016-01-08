@@ -10,7 +10,7 @@ Meteor.startup(function () {
 		res.setHeader('Access-Control-Allow-Origin', '*');
 		res.setHeader("Access-Control-Allow-Methods", "GET");
 		//res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Requested-With, Origin');
-		//return next();
+		return next();
 	});
 
 	BrowserPolicy.content.allowInlineStyles();
