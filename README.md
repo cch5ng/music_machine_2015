@@ -38,6 +38,8 @@
   * http://subtlepatterns.com/one-in-a-million-s/
 
 ### Status
+* hid or disabled sliders other than track 1 in order to troubleshoot
+
 * (TODO) would like to refactor: currently a lot of redundancy so would like to be able to add new tracks more easily
 * (TODO) need 2 more speed sliders
   * (DONE) added speed update functions to playground.js
