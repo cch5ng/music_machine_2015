@@ -1,9 +1,4 @@
-
-//This code is for everyone. Could go in common.js
-
-
-
-if (Meteor.isClient) {
+//client/main.js
 
   Meteor.startup(function () {
     //google web font
@@ -53,8 +48,12 @@ if (Meteor.isClient) {
         Session.set('startdac', 0);
 //reset start and all volume sliders
         MusicMachine.update({ _id: val._id }, {$set: {start: 0, sliderVolume1: 0, sliderVolume2: 0, sliderVolume3: 0, sliderVolume4: 0, sliderVolume5: 0, sliderVolume6: 0, sliderVolume7: 0, sliderVolume8: 0}});
+// 
+
 //reset all volume slider displays
-        $('#sliderVol1').slider('value', 0);
+		$("#sliderVol1").val(0);
+
+//        $('#sliderVol1').slider('value', 0);
         $('#sliderVol2').slider('value', 0);
         $('#sliderVol3').slider('value', 0);
         $('#sliderVol4').slider('value', 0);
@@ -66,8 +65,11 @@ if (Meteor.isClient) {
         Session.set('startdac', 1);
 //reset start and all volume sliders
         MusicMachine.update({ _id: val._id }, {$set: {start: 1, sliderVolume1: 1, sliderVolume2: 1, sliderVolume3: 1, sliderVolume4: 1, sliderVolume5: 1, sliderVolume6: 1, sliderVolume7: 1, sliderVolume8: 1}});
+//
 //reset all volume slider displays
-        $('#sliderVol1').slider('value', 1);
+		$("#sliderVol1").val(1);
+
+//        $('#sliderVol1').slider('value', 1);
         $('#sliderVol2').slider('value', 1);
         $('#sliderVol3').slider('value', 1);
         $('#sliderVol4').slider('value', 1);
@@ -252,9 +254,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setArpVolume(slider.sliderVolume3);
-        if (Session.get('sliderVolume3')) {
-          Session.set('sliderVolume3', slider.sliderVolume3);
-        }
+        // if (Session.get('sliderVolume3')) {
+        //   Session.set('sliderVolume3', slider.sliderVolume3);
+        // }
       }
 
       return slider.sliderVolume3;
@@ -265,9 +267,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setArpSpeed(slider.sliderSpeed3/50);
-        if (Session.get('sliderSpeed3')) {
-          Session.set('sliderSpeed3', slider.sliderSpeed3);
-        }
+        // if (Session.get('sliderSpeed3')) {
+        //   Session.set('sliderSpeed3', slider.sliderSpeed3);
+        // }
       }
 
       return slider.sliderSpeed3;
@@ -279,9 +281,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setVibesVolume(slider.sliderVolume4);
-        if (Session.get('sliderVolume4')) {
-          Session.set('sliderVolume4', slider.sliderVolume4);
-        }
+        // if (Session.get('sliderVolume4')) {
+        //   Session.set('sliderVolume4', slider.sliderVolume4);
+        // }
       }
 
       return slider.sliderVolume4;
@@ -292,9 +294,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setVibesSpeed(slider.sliderSpeed4/50);
-        if (Session.get('sliderSpeed4')) {
-          Session.set('sliderSpeed4', slider.sliderSpeed4);
-        }
+        // if (Session.get('sliderSpeed4')) {
+        //   Session.set('sliderSpeed4', slider.sliderSpeed4);
+        // }
       }
 
       return slider.sliderSpeed4;
@@ -305,9 +307,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setSnaredrumVolume(slider.sliderVolume5);
-        if (Session.get('sliderVolume5')) {
-          Session.set('sliderVolume5', slider.sliderVolume5);
-        }
+        // if (Session.get('sliderVolume5')) {
+        //   Session.set('sliderVolume5', slider.sliderVolume5);
+        // }
       }
 
       return slider.sliderVolume5;
@@ -318,9 +320,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setSnaredrumSpeed(slider.sliderSpeed5/50);
-        if (Session.get('sliderSpeed5')) {
-          Session.set('sliderSpeed5', slider.sliderSpeed5);
-        }
+        // if (Session.get('sliderSpeed5')) {
+        //   Session.set('sliderSpeed5', slider.sliderSpeed5);
+        // }
       }
 
       return slider.sliderSpeed5;
@@ -331,9 +333,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setChordsVolume(slider.sliderVolume6);
-        if (Session.get('sliderVolume6')) {
-          Session.set('sliderVolume6', slider.sliderVolume6);
-        }
+        // if (Session.get('sliderVolume6')) {
+        //   Session.set('sliderVolume6', slider.sliderVolume6);
+        // }
       }
 
       return slider.sliderVolume6;
@@ -344,9 +346,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setChordsSpeed(slider.sliderSpeed6/50);
-        if (Session.get('sliderSpeed6')) {
-          Session.set('sliderSpeed6', slider.sliderSpeed6);
-        }
+        // if (Session.get('sliderSpeed6')) {
+        //   Session.set('sliderSpeed6', slider.sliderSpeed6);
+        // }
       }
 
       return slider.sliderSpeed6;
@@ -357,9 +359,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setDrum2Volume(slider.sliderVolume7);
-        if (Session.get('sliderVolume7')) {
-          Session.set('sliderVolume7', slider.sliderVolume7);
-        }
+        // if (Session.get('sliderVolume7')) {
+        //   Session.set('sliderVolume7', slider.sliderVolume7);
+        // }
       }
 
       return slider.sliderVolume7;
@@ -370,9 +372,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setDrum2Speed(slider.sliderSpeed7/50);
-        if (Session.get('sliderSpeed7')) {
-          Session.set('sliderSpeed7', slider.sliderSpeed7);
-        }
+        // if (Session.get('sliderSpeed7')) {
+        //   Session.set('sliderSpeed7', slider.sliderSpeed7);
+        // }
       }
 
       return slider.sliderSpeed7;
@@ -383,9 +385,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setCymbalVolume(slider.sliderVolume8);
-        if (Session.get('sliderVolume8')) {
-          Session.set('sliderVolume8', slider.sliderVolume8);
-        }
+        // if (Session.get('sliderVolume8')) {
+        //   Session.set('sliderVolume8', slider.sliderVolume8);
+        // }
       }
 
       return slider.sliderVolume8;
@@ -396,9 +398,9 @@ if (Meteor.isClient) {
       var slider = MusicMachine.findOne();
       if (slider) {
         setCymbalSpeed(slider.sliderSpeed8/15);
-        if (Session.get('sliderSpeed8')) {
-          Session.set('sliderSpeed8', slider.sliderSpeed8);
-        }
+        // if (Session.get('sliderSpeed8')) {
+        //   Session.set('sliderSpeed8', slider.sliderSpeed8);
+        // }
       }
 
       return slider.sliderSpeed8;
@@ -409,18 +411,26 @@ if (Meteor.isClient) {
   Template.playground.events({
 
      "click button.myButton1": function () {
-      Session.set('drums', 1);
-      var val = MusicMachine.findOne({});
+      //var val = MusicMachine.findOne({});
+      player1.play();
+      //playDrums();
+      //Session.set('drums', val.sliderVolume1);
 //because of volume slider per track, the volume mongo field must be updated
-      MusicMachine.update({ _id: val._id }, {$set: {drums: 1, sliderVolume1: 1}});
+      //MusicMachine.update({ _id: val._id }, {$set: {drums: 1, sliderVolume1: 1}});
 //just updating the slider view so the user is clear
-      $('#sliderVol1').slider('value', 1);
+		// var slider = document.getElementById('sliderVol1');
+		// slider.noUiSlider.set(Session.get('drums'));
+
+		//$("#sliderVol1").noUiSlider.set(val.sliderVolume1);
+      //$('#sliderVol1').slider('value', val.sliderVolume1);
     },
       "click button.myButton2": function () {
-      Session.set('drums', 0);
-      var val = MusicMachine.findOne({});
-      MusicMachine.update({ _id: val._id }, {$set: {drums: 0, sliderVolume1: 0}});
-      $('#sliderVol1').slider('value', 0);
+      player1.stop();
+      //	stopDrums();
+      //Session.set('drums', 0);
+      //var val = MusicMachine.findOne({});
+      //MusicMachine.update({ _id: val._id }, {$set: {drums: 0, sliderVolume1: 0}});
+      //$('#sliderVol1').slider('value', 0);
     },
 
       "click button.myButton3": function () {
@@ -536,128 +546,200 @@ if (Meteor.isClient) {
         startSpeed5,
         startSpeed6,
         startSpeed7,
-        startSpeed8;
+        startSpeed8,
+        startVolume1,
+        startVolume2,
+        startVolume3,
+        startVolume4,
+        startVolume5,
+        startVolume6,
+        startVolume7,
+        startVolume8;
 
     //if (testDb) {
-      if (testDb.sliderSpeed1) {
-        startSpeed1 = testDb.sliderSpeed1;
-      } else {
-        startSpeed1 = 50;
-      }
+      // if (testDb.sliderVolume1) {
+      //   startVolume1 = testDb.sliderVolume1;
+      // } else {
+      //   startVolume1 = 1;
+      // }
 
-      if (testDb.sliderSpeed1) {
-        startSpeed2 = testDb.sliderSpeed2;
-      } else {
-        startSpeed2 = 50;
-      }
+      // if (testDb.sliderSpeed1) {
+      //   startSpeed1 = testDb.sliderSpeed1;
+      // } else {
+      //   startSpeed1 = 50;
+      // }
 
-      if (testDb.sliderSpeed1) {
-        startSpeed3 = testDb.sliderSpeed3;
-      } else {
-        startSpeed3 = 50;
-      }
+      // if (testDb.sliderSpeed2) {
+      //   startSpeed2 = testDb.sliderSpeed2;
+      // } else {
+      //   startSpeed2 = 50;
+      // }
 
-      if (testDb.sliderSpeed1) {
-        startSpeed4 = testDb.sliderSpeed4;
-      } else {
-        startSpeed4 = 50;
-      }
+      // if (testDb.sliderSpeed3) {
+      //   startSpeed3 = testDb.sliderSpeed3;
+      // } else {
+      //   startSpeed3 = 50;
+      // }
 
-      if (testDb.sliderSpeed5) {
-        startSpeed5 = testDb.sliderSpeed5;
-      } else {
-        startSpeed1 = 50;
-      }
+      // if (testDb.sliderSpeed4) {
+      //   startSpeed4 = testDb.sliderSpeed4;
+      // } else {
+      //   startSpeed4 = 50;
+      // }
 
-      if (testDb.sliderSpeed1) {
-        startSpeed6 = testDb.sliderSpeed6;
-      } else {
-        startSpeed6 = 50;
-      }
+      // if (testDb.sliderSpeed5) {
+      //   startSpeed5 = testDb.sliderSpeed5;
+      // } else {
+      //   startSpeed1 = 50;
+      // }
 
-      if (testDb.sliderSpeed1) {
-        startSpeed7 = testDb.sliderSpeed7;
-      } else {
-        startSpeed7 = 50;
-      }
+      // if (testDb.sliderSpeed1) {
+      //   startSpeed6 = testDb.sliderSpeed6;
+      // } else {
+      //   startSpeed6 = 50;
+      // }
 
-      if (testDb.sliderSpeed8) {
-        startSpeed8 = testDb.sliderSpeed8;
-      } else {
-        startSpeed8 = 50;
-      }
+      // if (testDb.sliderSpeed1) {
+      //   startSpeed7 = testDb.sliderSpeed7;
+      // } else {
+      //   startSpeed7 = 50;
+      // }
+
+      // if (testDb.sliderSpeed8) {
+      //   startSpeed8 = testDb.sliderSpeed8;
+      // } else {
+      //   startSpeed8 = 50;
+      // }
     //}
 
     var slider = MusicMachine.findOne();
 
-//track 1 speed slider
-    this.$("#nouiSpeed1").noUiSlider({
-      start: startSpeed1,
+//track 1 volume slider
+    this.$("#sliderVol1").noUiSlider({
+      start: (MusicMachine.findOne()) ? MusicMachine.findOne().sliderVolume1 : 1,
       orientation: 'vertical',
       direction: 'rtl',
       range: {
         'min': 0,
-        'max': 100
+        'max': 10
       }
     }).on('slide', function (ev, val) {
       // set real values on 'slide' event
+      var slider = MusicMachine.findOne();
       var fixedVal = Math.round(val);
-      setDrumSpeed(fixedVal/50);
-      Session.set('sliderSpeed1', fixedVal);
-      MusicMachine.update(slider._id, {$set: {sliderSpeed1: fixedVal}});
+      setDrumVolume(fixedVal);
+      Session.set('sliderVolume1', fixedVal);
+      MusicMachine.update(slider._id, {$set: {sliderVolume1: fixedVal}});
     }).on('change', function (ev, val) {
+//REFACTOR
       // round off values on 'change' event
+      var slider = MusicMachine.findOne();
       var fixedVal2 = Math.round(val);
-      setDrumSpeed(fixedVal2/50);
-      Session.set('sliderSpeed1', fixedVal2);
-      MusicMachine.update(slider._id, {$set: {sliderSpeed1: fixedVal2}});
+      setDrumVolume(fixedVal2);
+      Session.set('sliderVolume1', fixedVal2);
+      MusicMachine.update(slider._id, {$set: {sliderVolume1: fixedVal2}});
     });
+
+
+//track 1 speed slider
+    // this.$("#nouiSpeed1").noUiSlider({
+    //   start: (MusicMachine.findOne()) ? MusicMachine.findOne().sliderSpeed1 : 50, //startSpeed1,
+    //   orientation: 'vertical',
+    //   direction: 'rtl',
+    //   range: {
+    //     'min': 0,
+    //     'max': 100
+    //   }
+    // }).on('slide', function (ev, val) {
+    //   // set real values on 'slide' event
+    //   var slider = MusicMachine.findOne();
+    //   var fixedVal = Math.round(val);
+    //   setDrumSpeed(fixedVal/50);
+    //   Session.set('sliderSpeed1', fixedVal);
+    //   MusicMachine.update(slider._id, {$set: {sliderSpeed1: fixedVal}});
+    // }).on('change', function (ev, val) {
+    //   // round off values on 'change' event
+    //   var slider = MusicMachine.findOne();
+    //   var fixedVal2 = Math.round(val);
+    //   setDrumSpeed(fixedVal2/50);
+    //   Session.set('sliderSpeed1', fixedVal2);
+    //   MusicMachine.update(slider._id, {$set: {sliderSpeed1: fixedVal2}});
+    // });
+
+//track 2 volume slider
+//     this.$("#sliderVol2").noUiSlider({
+//       start: (MusicMachine.findOne()) ? MusicMachine.findOne().sliderVolume2 : 1,
+//       orientation: 'vertical',
+//       direction: 'rtl',
+//       range: {
+//         'min': 0,
+//         'max': 10
+//       }
+//     }).on('slide', function (ev, val) {
+//       // set real values on 'slide' event
+//       var slider = MusicMachine.findOne();
+//       var fixedVal = Math.round(val);
+//       setBassVolume(fixedVal);
+//       Session.set('sliderVolume2', fixedVal);
+//       MusicMachine.update(slider._id, {$set: {sliderVolume2: fixedVal}});
+//     }).on('change', function (ev, val) {
+// //REFACTOR
+//       // round off values on 'change' event
+//       var slider = MusicMachine.findOne();
+//       var fixedVal2 = Math.round(val);
+//       setBassVolume(fixedVal2);
+//       Session.set('sliderVolume2', fixedVal2);
+//       MusicMachine.update(slider._id, {$set: {sliderVolume2: fixedVal2}});
+//     });
+
 
 //track 2 speed slider
-    this.$("#nouiSpeed2").noUiSlider({
-      start: startSpeed2,
-      orientation: 'vertical',
-      direction: 'rtl',
-      range: {
-        'min': 0,
-        'max': 100
-      }
-    }).on('slide', function (ev, val) {
-      // set real values on 'slide' event
-      var fixedVal = Math.round(val);
-      setBassSpeed(fixedVal/50);
-      Session.set('sliderSpeed2', fixedVal);
-      MusicMachine.update(slider._id, {$set: {sliderSpeed2: fixedVal}});
-    }).on('change', function (ev, val) {
-      // round off values on 'change' event
-      var fixedVal2 = Math.round(val);
-      setBassSpeed(fixedVal2/50);
-      Session.set('sliderSpeed2', fixedVal2);
-      MusicMachine.update(slider._id, {$set: {sliderSpeed2: fixedVal2}});
-    });
+    // this.$("#nouiSpeed2").noUiSlider({
+    //   start: (MusicMachine.findOne()) ? MusicMachine.findOne().sliderSpeed2 : 50, //startSpeed2,
+    //   orientation: 'vertical',
+    //   direction: 'rtl',
+    //   range: {
+    //     'min': 0,
+    //     'max': 100
+    //   }
+    // }).on('slide', function (ev, val) {
+    //   // set real values on 'slide' event
+    //   var slider = MusicMachine.findOne();
+    //   var fixedVal = Math.round(val);
+    //   setBassSpeed(fixedVal/50);
+    //   Session.set('sliderSpeed2', fixedVal);
+    //   MusicMachine.update(slider._id, {$set: {sliderSpeed2: fixedVal}});
+    // }).on('change', function (ev, val) {
+    //   // round off values on 'change' event
+    //   var slider = MusicMachine.findOne();
+    //   var fixedVal2 = Math.round(val);
+    //   setBassSpeed(fixedVal2/50);
+    //   Session.set('sliderSpeed2', fixedVal2);
+    //   MusicMachine.update(slider._id, {$set: {sliderSpeed2: fixedVal2}});
+    // });
 
 //track 3 speed slider
-    this.$("#nouiSpeed3").noUiSlider({
-      start: startSpeed3,
-      orientation: 'vertical',
-      direction: 'rtl',
-      range: {
-        'min': 0,
-        'max': 100
-      }
-    }).on('slide', function (ev, val) {
-      // set real values on 'slide' event
-      var fixedVal = Math.round(val);
-      setArpSpeed(fixedVal/50);
-      Session.set('sliderSpeed3', fixedVal);
-      MusicMachine.update(slider._id, {$set: {sliderSpeed3: fixedVal}});
-    }).on('change', function (ev, val) {
-      // round off values on 'change' event
-      var fixedVal2 = Math.round(val);
-      setArpSpeed(fixedVal2/50);
-      Session.set('sliderSpeed3', fixedVal2);
-      MusicMachine.update(slider._id, {$set: {sliderSpeed3: fixedVal2}});
-    });
+    // this.$("#nouiSpeed3").noUiSlider({
+    //   start: (MusicMachine.findOne()) ? MusicMachine.findOne().sliderSpeed3 : 50, //startSpeed3,
+    //   orientation: 'vertical',
+    //   direction: 'rtl',
+    //   range: {
+    //     'min': 0,
+    //     'max': 100
+    //   }
+    // }).on('slide', function (ev, val) {
+    //   // set real values on 'slide' event
+    //   var fixedVal = Math.round(val);
+    //   setArpSpeed(fixedVal/50);
+    //   //Session.set('sliderSpeed3', fixedVal);
+    //   MusicMachine.update(slider._id, {$set: {sliderSpeed3: fixedVal}});
+    // }).on('change', function (ev, val) {
+    //   // round off values on 'change' event
+    //   var fixedVal2 = Math.round(val);
+    //   setArpSpeed(fixedVal2/50);
+    //   //Session.set('sliderSpeed3', fixedVal2);
+    //   MusicMachine.update(slider._id, {$set: {sliderSpeed3: fixedVal2}});
+    // });
 
 //END TEST
 
@@ -1032,20 +1114,7 @@ if (Meteor.isClient) {
   }, displayInterval);
 
   Template.playground.created = function() {
-    Tracker.autorun(function() {
-      console.log('sliderVolume1: ' + MusicMachine.find().fetch());
-    });
+    // Tracker.autorun(function() {
+    //   console.log('sliderVolume1: ' + MusicMachine.find().fetch());
+    // });
   };
-
-} //end isClient
-
-if (Meteor.isServer) {
-//use remove() to clear mongo for testing purposes
-  //MusicMachine.remove({});
-  if (MusicMachine.find().count() === 0) {
-//set initial start value to make sure dac button click would result in allplay initially
-//also initializing all volume settings so there is something to display
-    MusicMachine.insert({slide: 50, start: 0, sliderVolume1: 1, sliderVolume2: 1, sliderVolume3: 1, sliderVolume4: 1, sliderVolume5: 1, sliderVolume6: 1, sliderVolume7: 1, sliderVolume8: 1, sliderSpeed1: 50, sliderSpeed2: 50, sliderSpeed3: 50, sliderSpeed4: 50, sliderSpeed5: 50, sliderSpeed6: 50, sliderSpeed7: 50, sliderSpeed8: 50});
-  }
-}
-
