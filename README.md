@@ -22,6 +22,7 @@
 * http
 * aldeed:http
 * browser-policy
+* fourseven:scss
 
 ## (Dev) Adding Slider for track
 * Requires template handler to display mongo value for the slider (for ex volume)
@@ -39,6 +40,7 @@
 
 ### Status
 * hid or disabled sliders other than track 1 in order to troubleshoot
+* right now with only track 1 > volume slider enabled, not seeming to have the Tracker.afterFlush() 
 
 * (TODO) would like to refactor: currently a lot of redundancy so would like to be able to add new tracks more easily
 * (TODO) need 2 more speed sliders
