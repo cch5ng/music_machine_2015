@@ -50,17 +50,19 @@
         MusicMachine.update({ _id: val._id }, {$set: {start: 0, sliderVolume1: 0, sliderVolume2: 0, sliderVolume3: 0, sliderVolume4: 0, sliderVolume5: 0, sliderVolume6: 0, sliderVolume7: 0, sliderVolume8: 0}});
 // 
 
-//reset all volume slider displays
+//reset all volume slider displays nouislider
 		$("#sliderVol1").val(0);
+		$("#sliderVol2").val(0);
 
+//reset old jquery sliders
 //        $('#sliderVol1').slider('value', 0);
-        $('#sliderVol2').slider('value', 0);
-        $('#sliderVol3').slider('value', 0);
-        $('#sliderVol4').slider('value', 0);
-        $('#sliderVol5').slider('value', 0);
-        $('#sliderVol6').slider('value', 0);
-        $('#sliderVol7').slider('value', 0);
-        $('#sliderVol8').slider('value', 0);
+        // $('#sliderVol2').slider('value', 0);
+        // $('#sliderVol3').slider('value', 0);
+        // $('#sliderVol4').slider('value', 0);
+        // $('#sliderVol5').slider('value', 0);
+        // $('#sliderVol6').slider('value', 0);
+        // $('#sliderVol7').slider('value', 0);
+        // $('#sliderVol8').slider('value', 0);
       } else if (val.start === 0) {
         Session.set('startdac', 1);
 //reset start and all volume sliders
@@ -68,15 +70,16 @@
 //
 //reset all volume slider displays
 		$("#sliderVol1").val(1);
+		$("#sliderVol2").val(1);
 
 //        $('#sliderVol1').slider('value', 1);
-        $('#sliderVol2').slider('value', 1);
-        $('#sliderVol3').slider('value', 1);
-        $('#sliderVol4').slider('value', 1);
-        $('#sliderVol5').slider('value', 1);
-        $('#sliderVol6').slider('value', 1);
-        $('#sliderVol7').slider('value', 1);
-        $('#sliderVol8').slider('value', 1);
+        // $('#sliderVol2').slider('value', 1);
+        // $('#sliderVol3').slider('value', 1);
+        // $('#sliderVol4').slider('value', 1);
+        // $('#sliderVol5').slider('value', 1);
+        // $('#sliderVol6').slider('value', 1);
+        // $('#sliderVol7').slider('value', 1);
+        // $('#sliderVol8').slider('value', 1);
       }
     }
 
@@ -411,40 +414,39 @@
   Template.playground.events({
 
      "click button.myButton1": function () {
-      //var val = MusicMachine.findOne({});
+      var val = MusicMachine.findOne({});
       player1.play();
-      //playDrums();
-      //Session.set('drums', val.sliderVolume1);
+      Session.set('drums', val.sliderVolume1);
 //because of volume slider per track, the volume mongo field must be updated
-      //MusicMachine.update({ _id: val._id }, {$set: {drums: 1, sliderVolume1: 1}});
+      MusicMachine.update({ _id: val._id }, {$set: {drums: 1, sliderVolume1: 1}});
 //just updating the slider view so the user is clear
-		// var slider = document.getElementById('sliderVol1');
-		// slider.noUiSlider.set(Session.get('drums'));
-
-		//$("#sliderVol1").noUiSlider.set(val.sliderVolume1);
-      //$('#sliderVol1').slider('value', val.sliderVolume1);
+		$("#sliderVol1").val(1);
     },
       "click button.myButton2": function () {
       player1.stop();
-      //	stopDrums();
-      //Session.set('drums', 0);
-      //var val = MusicMachine.findOne({});
-      //MusicMachine.update({ _id: val._id }, {$set: {drums: 0, sliderVolume1: 0}});
-      //$('#sliderVol1').slider('value', 0);
+//try to keep slider value so if indiv track is toggled, it will resume at last set speed
+      Session.set('drums', 0);
+      var val = MusicMachine.findOne({});
+      MusicMachine.update({ _id: val._id }, {$set: {drums: 0, sliderVolume1: 0}});
+		$("#sliderVol1").val(0);
     },
 
       "click button.myButton3": function () {
+      player2.play();
       Session.set('bass', 1);
       var val = MusicMachine.findOne({});
       MusicMachine.update({ _id: val._id }, {$set: {bassline: 1, sliderVolume2: 1}});
-      $('#sliderVol2').slider('value', 1);
+		$("#sliderVol2").val(1);
+      // $('#sliderVol2').slider('value', 1);
     },
 
       "click button.myButton4": function () {
+      player2.stop();
       Session.set('bass', 0);
       var val = MusicMachine.findOne({});
       MusicMachine.update({ _id: val._id }, {$set: {bassline: 0, sliderVolume2: 0}});
-      $('#sliderVol2').slider('value', 0);
+		$("#sliderVol2").val(0);
+      // $('#sliderVol2').slider('value', 0);
     },
 
       "click button.myButton5": function () {
@@ -667,30 +669,30 @@
     // });
 
 //track 2 volume slider
-//     this.$("#sliderVol2").noUiSlider({
-//       start: (MusicMachine.findOne()) ? MusicMachine.findOne().sliderVolume2 : 1,
-//       orientation: 'vertical',
-//       direction: 'rtl',
-//       range: {
-//         'min': 0,
-//         'max': 10
-//       }
-//     }).on('slide', function (ev, val) {
-//       // set real values on 'slide' event
-//       var slider = MusicMachine.findOne();
-//       var fixedVal = Math.round(val);
-//       setBassVolume(fixedVal);
-//       Session.set('sliderVolume2', fixedVal);
-//       MusicMachine.update(slider._id, {$set: {sliderVolume2: fixedVal}});
-//     }).on('change', function (ev, val) {
-// //REFACTOR
-//       // round off values on 'change' event
-//       var slider = MusicMachine.findOne();
-//       var fixedVal2 = Math.round(val);
-//       setBassVolume(fixedVal2);
-//       Session.set('sliderVolume2', fixedVal2);
-//       MusicMachine.update(slider._id, {$set: {sliderVolume2: fixedVal2}});
-//     });
+    this.$("#sliderVol2").noUiSlider({
+      start: (MusicMachine.findOne()) ? MusicMachine.findOne().sliderVolume2 : 1,
+      orientation: 'vertical',
+      direction: 'rtl',
+      range: {
+        'min': 0,
+        'max': 10
+      }
+    }).on('slide', function (ev, val) {
+      // set real values on 'slide' event
+      var slider = MusicMachine.findOne();
+      var fixedVal = Math.round(val);
+      setBassVolume(fixedVal);
+      Session.set('sliderVolume2', fixedVal);
+      MusicMachine.update(slider._id, {$set: {sliderVolume2: fixedVal}});
+    }).on('change', function (ev, val) {
+//REFACTOR
+      // round off values on 'change' event
+      var slider = MusicMachine.findOne();
+      var fixedVal2 = Math.round(val);
+      setBassVolume(fixedVal2);
+      Session.set('sliderVolume2', fixedVal2);
+      MusicMachine.update(slider._id, {$set: {sliderVolume2: fixedVal2}});
+    });
 
 
 //track 2 speed slider

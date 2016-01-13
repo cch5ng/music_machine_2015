@@ -18,6 +18,7 @@ function createCORSRequest(method, url) {
   var xhr = new XMLHttpRequest();
   if ("withCredentials" in xhr) {
     xhr.open(method, url, true);
+    xhr.responseType = 'arraybuffer';
   } else if (typeof XDomainRequest != "undefined") {
     xhr = new XDomainRequest();
     xhr.open(method, url);
@@ -94,7 +95,7 @@ Maxim = function() {
     //audio.open('GET', url, true);
     
     //audio.open('GET', filename, true);
-    audio.responseType = 'arraybuffer';
+    //audio.responseType = 'arraybuffer';
 
     if (!audio) {
       throw new Error('CORS not supported');
