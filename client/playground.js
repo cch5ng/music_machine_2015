@@ -18,9 +18,9 @@ maxim8 = new Maxim();
 
 //new player per Maxim obj
 
-player1 = maxim1.loadFile("drums1.wav");
+player1 = maxim1.loadFile("../drums1.wav");
 player1.loop;
-player2 = maxim2.loadFile("bassline.wav");
+player2 = maxim2.loadFile("../bassline.wav");
 player2.loop;
 // player3 = maxim3.loadFile("arp.wav");
 // player3.loop;
