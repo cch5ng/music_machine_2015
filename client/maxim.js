@@ -11,37 +11,16 @@
 
 
 var mtof = [0, 8.661957, 9.177024, 9.722718, 10.3, 10.913383, 11.562325, 12.25, 12.978271, 13.75, 14.567617, 15.433853, 16.351599, 17.323914, 18.354048, 19.445436, 20.601723, 21.826765, 23.124651, 24.5, 25.956543, 27.5, 29.135235, 30.867706, 32.703197, 34.647827, 36.708096, 38.890873, 41.203445, 43.65353, 46.249302, 49., 51.913086, 55., 58.27047, 61.735413, 65.406395, 69.295654, 73.416191, 77.781746, 82.406891, 87.30706, 92.498604, 97.998856, 103.826172, 110., 116.540939, 123.470825, 130.81279, 138.591309, 146.832382, 155.563492, 164.813782, 174.61412, 184.997208, 195.997711, 207.652344, 220., 233.081879, 246.94165, 261.62558, 277.182617, 293.664764, 311.126984, 329.627563, 349.228241, 369.994415, 391.995422, 415.304688, 440., 466.163757, 493.883301, 523.25116, 554.365234, 587.329529, 622.253967, 659.255127, 698.456482, 739.988831, 783.990845, 830.609375, 880., 932.327515, 987.766602, 1046.502319, 1108.730469, 1174.659058, 1244.507935, 1318.510254, 1396.912964, 1479.977661, 1567.981689, 1661.21875, 1760., 1864.655029, 1975.533203, 2093.004639, 2217.460938, 2349.318115, 2489.015869, 2637.020508, 2793.825928, 2959.955322, 3135.963379, 3322.4375, 3520., 3729.31, 3951.066406, 4186.009277, 4434.921875, 4698.63623, 4978.031738, 5274.041016, 5587.651855, 5919.910645, 6271.926758, 6644.875, 7040., 7458.620117, 7902.132812, 8372.018555, 8869.84375, 9397.272461, 9956.063477, 10548.082031, 11175.303711, 11839.821289, 12543.853516, 13289.75];
-var context = new webkitAudioContext() || new AudioContext;
+var context = new webkitAudioContext() || new AudioContext;  
 
-//helper
-function createCORSRequest(method, url) {
-  var xhr = new XMLHttpRequest();
-//TEST
-  xhr.withCredentials = true;
-  if ("withCredentials" in xhr) {
-    xhr.open(method, url, true);
-    xhr.responseType = 'arraybuffer';
-  } else if (typeof XDomainRequest != "undefined") {
-    xhr = new XDomainRequest();
-    xhr.open(method, url);
-  } else {
-    xhr = null;
-  }
-
-  return xhr;
-}
-
-
-
-Maxim = function() {
+function Maxim(t) {
 
   this.loadFile = function(filename) {
-    var audio = new createCORSRequest('GET', filename);
-    //var audio = new XMLHttpRequest();
+    var audio = new XMLHttpRequest();
     var source = null;
     var myAudioBuffer = null;
     var playing=false;
-    var isLooping=true;
+    var isLooping=false;
     var startTime=0;
     var endTime = 0;
     var currentSpeed = 1.0;
@@ -57,52 +36,8 @@ Maxim = function() {
     var flux = 0;
     var averageSpectrumPower = 0;
     var FFTData = null;
-
-//TEST
-//     Meteor.call('getAudio', filename, function(err, result) {
-//       console.log('got drum1');
-//       if (result) {
-//         console.log('got a result');
-//         console.log('type of: ' + typeof result);
-//       } else {
-//         console.log('error: ' + err);
-//       }
-//       //console.log(result);
-
-// //copy over contents of original onload() function
-//       context.decodeAudioData(result.content, function(buffer) {
-//         myAudioBuffer = buffer;
-//         //       alert("sound decoded"); //test
-//         source = context.createBufferSource();
-//         gainNode = context.createGain();
-//         filter = context.createBiquadFilter();
-//         analyser = context.createAnalyser();
-//         filter.type = "lowpass";
-//         filter.frequency.value = 20000;
-//         envTime = 1.0;
-//         source.buffer = myAudioBuffer;
-//         source.playbackRate.value = currentSpeed;
-//         source.connect(filter);
-//         filter.connect(gainNode);
-//         gainNode.gain.value = volume;
-//         gainNode.connect(context.destination);
-//         sampleLength = source.buffer.duration*1000;
-//       });
-
-//     });
-
-//ORIGINAL Maxim.js
-    //test which did not work either on localhost or on *.meteor.com
-    //var url = 'http://chc_machina_musica2.meteor.com/' + filename;
-    //audio.open('GET', url, true);
-    
-    //audio.open('GET', filename, true);
-    //audio.responseType = 'arraybuffer';
-
-    if (!audio) {
-      throw new Error('CORS not supported');
-    }
-
+    audio.open('GET', filename, true);
+    audio.responseType = 'arraybuffer';
     audio.onload = function() {
       //      alert("sound loaded"); //test
       context.decodeAudioData(audio.response, function(buffer) {
@@ -124,15 +59,11 @@ Maxim = function() {
         sampleLength = source.buffer.duration*1000;
       }
       );
-    };
-
-    audio.onerror = function(event) {
-      console.log('xhr request error: ' + event.message);
     }
 
     audio.send();
-
     audio.isPlaying = function() {
+
       return playing;
     }
 
@@ -141,13 +72,16 @@ Maxim = function() {
     }
 
     audio.cue = function(time) {
-      audio.stop();
+
+  audio.stop();
       startTime=time/1000;
     }
 
     audio.speed = function(speed) {
       if (source) {
+
         currentSpeed = speed;
+
         source.playbackRate.value = speed;
       }
     }
@@ -164,7 +98,9 @@ Maxim = function() {
     }
 
     audio.volume = function(gain) {
+
       volume=gain;
+
       if (playing) {
         gainNode.gain.value = volume;
       }
@@ -186,9 +122,10 @@ Maxim = function() {
         gainNode.connect(context.destination);
         gainNode.gain.value = volume;
         //          alert("source connected"); //test
-
-        if (isLooping)source.loop = true;
-        source.start(0);
+        if (isLooping) source.loop = true;
+        //          source.loopStart = startTime/1000;
+        //          source.loopEnd = source.buffer.duration;
+        source.start(0, startTime, source.buffer.duration-startTime);
         playing=true;
       }
       if (analysing==true && playing) {
@@ -199,18 +136,20 @@ Maxim = function() {
     }
 
     audio.stop = function() {
-      if (source && playing) {
+      if (source) {
         source.stop(0);
         playing=false;
       }
     }
 
     audio.setFilter = function(freq, res) {
+
       filter.frequency.value = freq;
       filter.Q.value = res;
     }
 
     audio.filterRamp = function(freq, envTime) {
+
       filter.frequency.cancelScheduledValues(context.currentTime);
       filter.frequency.linearRampToValueAtTime(filter.frequency.value, context.currentTime);   // THIS IS THE CHANGE FROM PREVIOUS CODE EXAMPLE
       filter.frequency.linearRampToValueAtTime(freq, context.currentTime + envTime/1000.);
@@ -218,12 +157,14 @@ Maxim = function() {
 
     //This function allows you to set the amplitude of the waveform
     audio.setAmplitude = function(amplitude) {
+
       gainNode.gain.cancelScheduledValues(context.currentTime);
       gainNode.gain.linearRampToValueAtTime(gainNode.gain.value, context.currentTime);
       gainNode.gain.linearRampToValueAtTime(amplitude, context.currentTime + 10);
     }
 
     audio.ramp = function(amplitude, envTime) {
+
       gainNode.gain.cancelScheduledValues(context.currentTime);
       gainNode.gain.linearRampToValueAtTime(gainNode.gain.value, context.currentTime);
       gainNode.gain.linearRampToValueAtTime(amplitude, context.currentTime + envTime/1000.);
@@ -390,4 +331,3 @@ Synth.prototype.filterRamp = function(freq, envTime) {
   //  this.filter.frequency.value = freq;
   //  this.filter.Q.value = res;
 }
-
