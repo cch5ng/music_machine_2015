@@ -2,12 +2,12 @@
 
 //routes as workaround for cors
 //TEST
-Router.route('/drums1.wav', function () {
-  var req = this.request;
-  var res = this.response;
-  res.setHeader('access-control-allow-origin', '*');
-  res.end('audio result from the server\n');
-}, {where: 'server'});
+// Router.route('/drums1.wav', function () {
+//   var req = this.request;
+//   var res = this.response;
+//   res.setHeader('access-control-allow-origin', '*');
+//   res.end('audio result from the server\n');
+// }, {where: 'server'});
 
 Meteor.startup(function() {
 	//use remove() to clear mongo for testing purposes
