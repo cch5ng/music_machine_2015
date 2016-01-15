@@ -16,6 +16,8 @@ var context = new webkitAudioContext() || new AudioContext;
 //helper
 function createCORSRequest(method, url) {
   var xhr = new XMLHttpRequest();
+//TEST
+  xhr.withCredentials = true;
   if ("withCredentials" in xhr) {
     xhr.open(method, url, true);
     xhr.responseType = 'arraybuffer';
@@ -124,8 +126,8 @@ Maxim = function() {
       );
     };
 
-    audio.onerror = function() {
-      console.log('there was an error');
+    audio.onerror = function(event) {
+      console.log('xhr request error: ' + event.message);
     }
 
     audio.send();
